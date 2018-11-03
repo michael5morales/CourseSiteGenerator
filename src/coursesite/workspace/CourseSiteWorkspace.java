@@ -6,6 +6,7 @@
 package coursesite.workspace;
 
 import coursesite.CourseSiteApp;
+import coursesitetab.workspace.CourseSiteTabWorkspace;
 import djf.components.AppWorkspaceComponent;
 import djf.ui.AppNodesBuilder;
 import java.awt.Rectangle;
@@ -15,7 +16,11 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import meetingtimestab.workspace.MeetingTimesTabWorkspace;
+import officehourstab.workspace.OfficeHoursTabWorkspace;
 import properties_manager.PropertiesManager;
+import scheduletab.workspace.ScheduleTabWorkspace;
+import syllabusTab.workspace.SyllabusTabWorkspace;
 
 /**
  *
@@ -44,25 +49,22 @@ public class CourseSiteWorkspace extends AppWorkspaceComponent{
         AppNodesBuilder csBuilder = app.getGUIModule().getNodesBuilder();
 
         TabPane tPane = new TabPane();
-       
-        Tab siteTab = new Tab("Site");
-        Tab syllabusTab = new Tab("Syllabus");
-        Tab meetingTab = new Tab("Meeting Times");
-        Tab ohTab = new Tab("Office Hours");
-        Tab scheduleTab = new Tab("Schedule");
+
+        CourseSiteTabWorkspace coursesiteTab = new CourseSiteTabWorkspace((CourseSiteApp) app);
+        tPane.getTabs().add(coursesiteTab.siteTab);
         
-        siteTab.closableProperty().setValue(false);
-        syllabusTab.closableProperty().setValue(false);
-        meetingTab.closableProperty().setValue(false);
-        ohTab.closableProperty().setValue(false);
-        scheduleTab.closableProperty().setValue(false);
+        SyllabusTabWorkspace syllabusTab = new SyllabusTabWorkspace((CourseSiteApp) app);
+        tPane.getTabs().add(syllabusTab.syllabusTab);
         
-        tPane.getTabs().add(siteTab);
-        tPane.getTabs().add(syllabusTab);
-        tPane.getTabs().add(meetingTab);
-        tPane.getTabs().add(ohTab);
-        tPane.getTabs().add(scheduleTab);
+        MeetingTimesTabWorkspace meetingTimesTab = new MeetingTimesTabWorkspace((CourseSiteApp) app);
+        tPane.getTabs().add(meetingTimesTab.meetingTimesTab);
         
+        OfficeHoursTabWorkspace officeHoursTab = new OfficeHoursTabWorkspace((CourseSiteApp) app);
+        tPane.getTabs().add(officeHoursTab.officeHoursTab);
+        
+        ScheduleTabWorkspace scheduleTab = new ScheduleTabWorkspace((CourseSiteApp) app);
+        tPane.getTabs().add(scheduleTab.scheduleTab);
+            
         workspace = new BorderPane();
         
         ((BorderPane)workspace).setCenter(tPane);

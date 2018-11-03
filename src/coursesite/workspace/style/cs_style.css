@@ -43,15 +43,14 @@
 
 /* THE TOOLBAR RUNNING THE LENGTH OF THE TOP OF THE UI */
 .djf_top_toolbar {
-    -fx-background-color:   SWATCH_NEUTRAL;
-    -fx-border-color:       SWATCH_ACCENT;
+    -fx-background-color:   white;
     -fx-border-width:       2;
     -fx-border-radius:      15;
 }
 /* A TOOLBAR IN THE TOP TOOLBAR LIKELY WITH BUTTONS */
 .djf_toolbar_pane {
-    -fx-background-color:   SWATCH_COMPLEMENT;
-    -fx-border-color:       SWATCH_ACCENT;
+    -fx-background-color:   rgb(254, 250, 192);
+    -fx-border-color:       black;
     -fx-border-width:       2;
     -fx-border-radius:      15;
     -fx-background-radius: 15;
@@ -104,4 +103,17 @@
 .djf-welcome_new_button:pressed{
     -fx-background-color: SWATCH_NEUTRAL;
 }
-
+.cs_header_label{
+    -fx-font-size:15pt;
+    -fx-font-weight:bold;
+}
+.cs_prompt{
+    -fx-font-weight:bold;
+}
+.cs_box{
+    -fx-background-color: lightgrey;
+    -fx-border-color: black;
+}
+.cs_pane{
+    -fx-background-color: rgb(255, 216, 173);
+}

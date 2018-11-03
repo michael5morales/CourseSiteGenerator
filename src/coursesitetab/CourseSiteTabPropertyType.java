@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package coursesitetab;
+
+/**
+ *
+ * @author Michael
+ */
+public enum CourseSiteTabPropertyType {
+    CS_TAB_BANNER_LABEL,
+    CS_TAB_BANNER_SUBJECT_LABEL,
+    CS_TAB_BANNER_NUMBER_LABEL,
+    CS_TAB_BANNER_SEMESTER_LABEL,
+    CS_TAB_BANNER_YEAR_LABEL,
+    CS_TAB_BANNER_TITLE_LABEL,
+    CS_TAB_BANNER_EXPORT_LABEL,
+    CS_TAB_PAGES_LABEL,
+    CS_TAB_HOME_CHECK_BOX,
+    CS_TAB_SYLLABUS_CHECK_BOX,
+    CS_TAB_SCHEDULE_CHECK_BOX,
+    CS_TAB_HWS_CHECK_BOX,
+    CS_TAB_STYLE_LABEL,
+    CS_TAB_FONTS_LABEL,
+    CS_TAB_NOTE_LABEL,
+    CS_TAB_ICON_BUTTON,
+    CS_TAB_NAV_IMAGE_BUTTON,
+    CS_TAB_LEFT_FOOTER_BUTTON,
+    CS_TAB_RIGHT_FOOTER_BUTTON,
+    CS_TAB_STYLE_CHECK_BOX,
+    CS_TAB_INSTRUCTOR_LABEL,
+    CS_TAB_NAME_LABEL,
+    CS_TAB_EMAIL_LABEL,
+    CS_TAB_ROOM_LABEL,
+    CS_TAB_HOME_PAGE_LABEL,
+    CS_TAB_NAME_TEXT_FIELD,
+    CS_TAB_EMAIL_TEXT_FIELD,
+    CS_TAB_ROOM_TEXT_FIELD,
+    CS_TAB_HOME_PAGE_TEXT_FIELD,
+    CS_TAB_PLUS_BUTTON,
+    CS_TAB_OFFICE_HOURS_LABEL,
+    
+    
+    CS_NULL_LIST
+}
