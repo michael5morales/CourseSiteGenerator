@@ -24,7 +24,7 @@ import officehourstab.data.TimeSlot.DayOfWeek;
  *
  * @author Michael
  */
-public class OfficeHoursData {
+public class OfficeHoursData implements AppDataComponent {
     
     // WE'LL NEED ACCESS TO THE APP TO NOTIFY THE GUI WHEN DATA CHANGES
     CourseSiteApp app;
@@ -84,6 +84,17 @@ public class OfficeHoursData {
 
     public int getEndHour() {
         return endHour;
+    }
+    
+    @Override
+    public void reset() {
+        startHour = MIN_START_HOUR;
+        endHour = MAX_END_HOUR;
+        teachingAssistants.clear();
+        
+        for (TimeSlot timeSlot : officeHours) {
+            timeSlot.reset();
+        }
     }
     
     // PRIVATE HELPER METHODS

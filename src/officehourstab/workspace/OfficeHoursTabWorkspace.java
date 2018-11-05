@@ -7,16 +7,21 @@ package officehourstab.workspace;
 
 import coursesite.CourseSiteApp;
 import static coursesite.workspace.style.CSStyle.*;
+import djf.modules.AppFoolproofModule;
+import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -24,6 +29,8 @@ import javafx.scene.layout.VBox;
 import static officehourstab.OfficeHoursTabPropertyType.*;
 import officehourstab.data.TeachingAssistantPrototype;
 import officehourstab.data.TimeSlot;
+import officehourstab.workspace.controllers.OfficeHoursTabController;
+import officehourstab.workspace.foolproof.OfficeHoursTabFoolproofDesign;
 import properties_manager.PropertiesManager;
 
 /**
@@ -192,10 +199,72 @@ public class OfficeHoursTabWorkspace {
     }
     
     public void initControllers() {
-        
+        OfficeHoursTabController controller = new OfficeHoursTabController((CourseSiteApp) app);
+        AppGUIModule gui = app.getGUIModule();
+
+        // FOOLPROOF DESIGN STUFF
+        TextField nameTextField = ((TextField) gui.getGUINode(OH_NAME_TEXT_FIELD));
+        TextField emailTextField = ((TextField) gui.getGUINode(OH_EMAIL_TEXT_FIELD));
+
+        nameTextField.textProperty().addListener(e -> {
+            controller.processTypeTA();
+        });
+        emailTextField.textProperty().addListener(e -> {
+            controller.processTypeTA();
+        });
+
+        // FIRE THE ADD EVENT ACTION
+        nameTextField.setOnAction(e -> {
+            controller.processAddTA();
+        });
+        emailTextField.setOnAction(e -> {
+            controller.processAddTA();
+        });
+        ((Button) gui.getGUINode(OH_ADD_TA_BUTTON)).setOnAction(e -> {
+            controller.processAddTA();
+        });
+
+        TableView officeHoursTableView = (TableView) gui.getGUINode(OH_OFFICE_HOURS_TABLE_VIEW);
+        officeHoursTableView.getSelectionModel().setCellSelectionEnabled(true);
+        officeHoursTableView.setOnMouseClicked(e -> {
+            controller.processToggleOfficeHours();
+        });
+
+        // DON'T LET ANYONE SORT THE TABLES
+        TableView tasTableView = (TableView) gui.getGUINode(OH_TAS_TABLE_VIEW);
+        for (int i = 0; i < officeHoursTableView.getColumns().size(); i++) {
+            ((TableColumn) officeHoursTableView.getColumns().get(i)).setSortable(false);
+        }
+        for (int i = 0; i < tasTableView.getColumns().size(); i++) {
+            ((TableColumn) tasTableView.getColumns().get(i)).setSortable(false);
+        }
+
+        tasTableView.setOnMouseClicked(e -> {
+            app.getFoolproofModule().updateAll();
+            if (e.getClickCount() == 2) {
+                controller.processEditTA();
+            }
+            controller.processSelectTA();
+        });
+
+        RadioButton allRadio = (RadioButton) gui.getGUINode(OH_ALL_RADIO_BUTTON);
+        allRadio.setOnAction(e -> {
+            controller.processSelectAllTAs();
+        });
+        RadioButton gradRadio = (RadioButton) gui.getGUINode(OH_GRADUATE_TA_RADIO_BUTTON);
+        gradRadio.setOnAction(e -> {
+            controller.processSelectGradTAs();
+        });
+        RadioButton undergradRadio = (RadioButton) gui.getGUINode(OH_UNDERGRADUATE_TA_RADIO_BUTTON);
+        undergradRadio.setOnAction(e -> {
+            controller.processSelectUndergradTAs();
+        });
     }
-    
+
     public void initFoolproofDesign() {
-        
+        AppGUIModule gui = app.getGUIModule();
+        AppFoolproofModule foolproofSettings = app.getFoolproofModule();
+        foolproofSettings.registerModeSettings(OH_FOOLPROOF_SETTINGS,
+                new OfficeHoursTabFoolproofDesign((CourseSiteApp) app));
     }
 }
