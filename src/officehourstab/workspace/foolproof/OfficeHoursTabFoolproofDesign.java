@@ -30,6 +30,7 @@ public class OfficeHoursTabFoolproofDesign implements FoolproofDesign {
     public void updateControls() {
         updateAddTAFoolproofDesign();
         updateEditTAFoolproofDesign();
+        updateRemoveTAFoolproofDesign();
     }
 
     private void updateAddTAFoolproofDesign() {
@@ -81,6 +82,21 @@ public class OfficeHoursTabFoolproofDesign implements FoolproofDesign {
     
     private void updateEditTAFoolproofDesign() {
         
+    }
+    
+    private void updateRemoveTAFoolproofDesign() {
+        AppGUIModule gui = app.getGUIModule();
+        
+        // FOOLPROOF DESIGN STUFF FOR REMOVE TA BUTTON
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
+        Button addTAButton = (Button) gui.getGUINode(OH_MINUS_BUTTON);
+        
+        if (data.isTASelected()) {
+            addTAButton.setDisable(false);
+        } else {
+            addTAButton.setDisable(true);
+        }
     }
     
     public void foolproofTextField(TextField textField, boolean hasLegalData) {

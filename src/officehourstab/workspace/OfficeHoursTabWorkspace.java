@@ -76,7 +76,7 @@ public class OfficeHoursTabWorkspace {
         //BUILD TA TABLE SECTION
         HBox taTableBox = csBuilder.buildHBox(this, officeHoursBox, EMPTY_TEXT, ENABLED);
         
-        csBuilder.buildTextButton(OH_MINUS_BUTTON, taTableBox, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildTextButton(OH_MINUS_BUTTON, taTableBox, CLASS_CS_PROMPT, !ENABLED);
         csBuilder.buildLabel(OH_TAS_LABEL, taTableBox, CLASS_CS_PROMPT, ENABLED);
         
         HBox radioButtonsBox = csBuilder.buildHBox(this, taTableBox, EMPTY_TEXT, ENABLED);
@@ -222,6 +222,9 @@ public class OfficeHoursTabWorkspace {
         });
         ((Button) gui.getGUINode(OH_ADD_TA_BUTTON)).setOnAction(e -> {
             controller.processAddTA();
+        });
+        ((Button) gui.getGUINode(OH_MINUS_BUTTON)).setOnAction(e -> {
+            controller.processRemoveTA();
         });
 
         TableView officeHoursTableView = (TableView) gui.getGUINode(OH_OFFICE_HOURS_TABLE_VIEW);

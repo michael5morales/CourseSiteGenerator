@@ -9,6 +9,8 @@ import coursesite.CourseSiteApp;
 import coursesite.data.CourseSiteData;
 import djf.modules.AppGUIModule;
 import djf.ui.dialogs.AppDialogsFacade;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -22,6 +24,7 @@ import officehourstab.data.TimeSlot;
 import officehourstab.data.TimeSlot.DayOfWeek;
 import officehourstab.transactions.AddTA_Transaction;
 import officehourstab.transactions.EditTA_Transaction;
+import officehourstab.transactions.RemoveTA_Transaction;
 import officehourstab.transactions.ToggleOfficeHours_Transaction;
 import officehourstab.workspace.dialogs.TADialog;
 
@@ -59,6 +62,20 @@ public class OfficeHoursTabController {
         app.getFoolproofModule().updateControls(OH_FOOLPROOF_SETTINGS);
     }
 
+    public void processRemoveTA() {
+        AppGUIModule gui = app.getGUIModule();
+        
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
+        
+        TeachingAssistantPrototype ta = data.getSelectedTA();
+        HashMap<TimeSlot, ArrayList<DayOfWeek>> officeHours = data.getTATimeSlots(ta);
+        RemoveTA_Transaction removeTATransaction = new RemoveTA_Transaction(app, ta, officeHours);
+        app.processTransaction(removeTATransaction);
+            
+        app.getFoolproofModule().updateControls(OH_FOOLPROOF_SETTINGS);
+    }
+    
     public void processVerifyTA() {
 
     }
