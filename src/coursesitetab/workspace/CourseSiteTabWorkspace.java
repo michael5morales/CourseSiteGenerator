@@ -10,12 +10,15 @@ import static coursesite.workspace.style.CSStyle.*;
 import static coursesitetab.CourseSiteTabPropertyType.*;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
+import java.io.File;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Tab;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -120,8 +123,30 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildTextButton(CS_TAB_RIGHT_FOOTER_BUTTON, styleBox, 0, 4, 1, 1, CLASS_CS_BUTTON, ENABLED);
         
         //BUILD IMAGES
+        ImageView iconImage = new ImageView();
+        String iconUrl = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldIcon.png";
+        iconImage.setImage(new Image(iconUrl));
+        
+        ImageView navbarImage = new ImageView();
+        String navbarURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUDarkRedShieldLogo.png";
+        navbarImage.setImage(new Image(navbarURL));
+        
+        ImageView leftFooterImage = new ImageView();
+        String leftFooterURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldLogo.png";
+        leftFooterImage.setImage(new Image(leftFooterURL));
+        
+        ImageView rightFooterImage = new ImageView();
+        String rightFooterURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUCSLogo.png";
+        rightFooterImage.setImage(new Image(rightFooterURL));
+        
+        
+        styleBox.add(iconImage, 1, 1);
+        styleBox.add(navbarImage, 1, 2);
+        styleBox.add(leftFooterImage, 1, 3);
+        styleBox.add(rightFooterImage, 1, 4);
+
         //BUILD COMBOBOXES
-        ComboBox style = csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 4, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
+        ComboBox style = csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 5, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
         style.getItems().add("sea_wolf.css");
         
         
