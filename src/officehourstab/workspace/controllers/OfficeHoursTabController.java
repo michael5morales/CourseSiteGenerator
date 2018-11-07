@@ -12,6 +12,7 @@ import djf.ui.dialogs.AppDialogsFacade;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -79,6 +80,10 @@ public class OfficeHoursTabController {
     public void processVerifyTA() {
 
     }
+    
+    public void processToggleStartTime() {
+        
+    }
 
     public void processToggleOfficeHours() {
         AppGUIModule gui = app.getGUIModule();
@@ -112,9 +117,27 @@ public class OfficeHoursTabController {
         app.getFoolproofModule().updateControls(OH_FOOLPROOF_SETTINGS);
     }
 
+    public void processChangeStartTime() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData(); 
+        
+        ComboBox startBox = (ComboBox) app.getGUIModule().getGUINode(OH_START_TIME_COMBO_BOX);
+        String startTime = (String)startBox.getValue();
+        
+        
+    }
+    
+    public void processChangeEndTime() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();    
+        
+        ComboBox endBox = (ComboBox) app.getGUIModule().getGUINode(OH_END_TIME_COMBO_BOX);
+    }
+    
     public void processEditTA() {
         CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
-        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();        if (data.isTASelected()) {
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();        
+        if (data.isTASelected()) {
             TeachingAssistantPrototype taToEdit = data.getSelectedTA();
             TADialog taDialog = (TADialog)app.getGUIModule().getDialog(OH_TA_EDIT_DIALOG);
             taDialog.showEditDialog(taToEdit);

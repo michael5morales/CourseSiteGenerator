@@ -10,7 +10,10 @@ import coursesite.data.CourseSiteData;
 import static coursesite.workspace.style.CSStyle.*;
 import djf.modules.AppGUIModule;
 import djf.ui.foolproof.FoolproofDesign;
+import java.util.ArrayList;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import static officehourstab.OfficeHoursTabPropertyType.*;
 import officehourstab.data.OfficeHoursData;
@@ -31,6 +34,8 @@ public class OfficeHoursTabFoolproofDesign implements FoolproofDesign {
         updateAddTAFoolproofDesign();
         updateEditTAFoolproofDesign();
         updateRemoveTAFoolproofDesign();
+        updateEndTimeComboBoxFoolproofDesign();
+        
     }
 
     private void updateAddTAFoolproofDesign() {
@@ -82,6 +87,25 @@ public class OfficeHoursTabFoolproofDesign implements FoolproofDesign {
     
     private void updateEditTAFoolproofDesign() {
         
+    }
+    
+    private void updateEndTimeComboBoxFoolproofDesign() {
+        AppGUIModule gui = app.getGUIModule();
+        
+        // FOOLPROOF DESIGN STUFF FOR REMOVE TA BUTTON
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
+        
+        ComboBox endTimes = (ComboBox) gui.getGUINode(OH_END_TIME_COMBO_BOX);
+        ArrayList<String> timeList = data.getEndTimes();
+        ObservableList<String> endList = endTimes.getItems();
+        endList.clear();
+        
+        for (String time : timeList) {
+            endList.add(time);
+        }
+        
+        endTimes.setItems(endList);
     }
     
     private void updateRemoveTAFoolproofDesign() {

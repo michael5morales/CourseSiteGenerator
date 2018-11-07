@@ -6,6 +6,7 @@
 package officehourstab.workspace;
 
 import coursesite.CourseSiteApp;
+import coursesite.data.CourseSiteData;
 import static coursesite.workspace.style.CSStyle.*;
 import djf.modules.AppFoolproofModule;
 import djf.modules.AppGUIModule;
@@ -14,6 +15,7 @@ import djf.ui.AppNodesBuilder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
@@ -27,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import static officehourstab.OfficeHoursTabPropertyType.*;
+import officehourstab.data.OfficeHoursData;
 import officehourstab.data.TeachingAssistantPrototype;
 import officehourstab.data.TimeSlot;
 import officehourstab.workspace.controllers.OfficeHoursTabController;
@@ -124,11 +127,11 @@ public class OfficeHoursTabWorkspace {
         
         HBox startBox = csBuilder.buildHBox(this, startEndBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildLabel(OH_START_TIME_LABEL, startBox, CLASS_CS_PROMPT, ENABLED);
-        csBuilder.buildComboBox(this, OH_NULL, OH_NULL, startBox, EMPTY_TEXT, ENABLED);
+        csBuilder.buildComboBox(OH_START_TIME_COMBO_BOX, TIME_OPTIONS, OH_DEFAULT_START_TIME, startBox, EMPTY_TEXT, ENABLED);
         
         HBox endBox = csBuilder.buildHBox(this, startEndBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildLabel(OH_END_TIME_LABEL, endBox, CLASS_CS_PROMPT, ENABLED);
-        csBuilder.buildComboBox(this, OH_NULL, OH_NULL, endBox, EMPTY_TEXT, ENABLED);
+        csBuilder.buildComboBox(OH_END_TIME_COMBO_BOX, TIME_OPTIONS, OH_DEFAULT_END_TIME, endBox, EMPTY_TEXT, ENABLED);
         
         TableView<TimeSlot> officeHoursTable = csBuilder.buildTableView(OH_OFFICE_HOURS_TABLE_VIEW, officeHoursBox, CLASS_OH_OFFICE_HOURS_TABLE_VIEW, ENABLED);
         setupOfficeHoursColumn(OH_START_TIME_TABLE_COLUMN, officeHoursTable, CLASS_OH_TIME_COLUMN, "startTime");
@@ -226,7 +229,16 @@ public class OfficeHoursTabWorkspace {
         ((Button) gui.getGUINode(OH_MINUS_BUTTON)).setOnAction(e -> {
             controller.processRemoveTA();
         });
-
+        ((ComboBox) gui.getGUINode(OH_START_TIME_COMBO_BOX)).setOnAction(e -> {
+            System.out.print("START");
+            
+            app.getFoolproofModule().updateControls(OH_FOOLPROOF_SETTINGS);
+        });
+        ((ComboBox) gui.getGUINode(OH_END_TIME_COMBO_BOX)).setOnAction(e -> {
+            System.out.print("END");
+           
+        });
+        
         TableView officeHoursTableView = (TableView) gui.getGUINode(OH_OFFICE_HOURS_TABLE_VIEW);
         officeHoursTableView.getSelectionModel().setCellSelectionEnabled(true);
         officeHoursTableView.setOnMouseClicked(e -> {

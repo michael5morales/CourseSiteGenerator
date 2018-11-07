@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import static officehourstab.OfficeHoursTabPropertyType.*;
@@ -36,7 +37,7 @@ public class OfficeHoursData implements AppDataComponent {
     // DATA IN THE ROWS OF THE TABLE VIEW
     ObservableList<TeachingAssistantPrototype> teachingAssistants;
     ObservableList<TimeSlot> officeHours;    
-
+    ArrayList<TimeSlot> allOH;
     // THESE ARE THE TIME BOUNDS FOR THE OFFICE HOURS GRID. NOTE
     // THAT THESE VALUES CAN BE DIFFERENT FOR DIFFERENT FILES, BUT
     // THAT OUR APPLICATION USES THE DEFAULT TIME VALUES AND PROVIDES
@@ -68,7 +69,7 @@ public class OfficeHoursData implements AppDataComponent {
         // GET THE LIST OF TAs FOR THE LEFT TABLE
         TableView<TeachingAssistantPrototype> taTableView = (TableView)gui.getGUINode(OH_TAS_TABLE_VIEW);
         teachingAssistants = taTableView.getItems();
-
+        
         // THESE ARE THE DEFAULT OFFICE HOURS
         startHour = MIN_START_HOUR;
         endHour = MAX_END_HOUR;
@@ -118,6 +119,7 @@ public class OfficeHoursData implements AppDataComponent {
                                                     this.getTimeString(i+1, true));
             officeHours.add(halfTimeSlot);
         }
+        
     }
     
     private String getTimeString(int militaryHour, boolean onHour) {
@@ -140,7 +142,18 @@ public class OfficeHoursData implements AppDataComponent {
         return cellText;
     }
     
-
+    private int getTimeInt(String time) {
+        int timeInteger = 0;
+        
+        timeInteger += Integer.parseInt(time.substring(0 , time.length() - 6));
+        
+        if (time.substring(5).equals("pm")) {
+            timeInteger += 12;
+        }
+      
+        return timeInteger;
+    }
+    
     public void initHours(String startHourText, String endHourText) {
         int initStartHour = Integer.parseInt(startHourText);
         int initEndHour = Integer.parseInt(endHourText);
@@ -151,6 +164,43 @@ public class OfficeHoursData implements AppDataComponent {
             endHour = initEndHour;
         }
         resetOfficeHours();
+    }
+    
+    public ArrayList<String> getEndTimes() {
+        ComboBox start = (ComboBox) app.getGUIModule().getGUINode(OH_START_TIME_COMBO_BOX);
+        ObservableList<String> startList = start.getItems();
+        ArrayList<String> endList = new ArrayList<>();
+        
+        for (String time : startList) {
+            endList.add(time);
+        }
+        
+        String startTime = (String)start.getValue();
+        
+        while(true) {
+            int currStart = getTimeInt(endList.get(0));
+            if (currStart < getTimeInt(startTime)) {
+                endList.remove(0);
+            } else {
+                break;
+            } 
+        }
+        
+        return endList;
+    }
+    
+    public void changeStartTime(String start) {
+        int startTime = getTimeInt(start);
+ 
+        
+        for (int i =0; i < officeHours.size(); i++) {
+            int currTime = getTimeInt(officeHours.get(0).getStartTime());
+            if (startTime < currTime) {
+                officeHours.remove(0);
+                i--;
+            }  
+        }
+        
     }
     
     public void addTA(TeachingAssistantPrototype ta) {
