@@ -11,6 +11,8 @@ import static coursesitetab.CourseSiteTabPropertyType.*;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Tab;
@@ -72,10 +74,10 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildLabel(this, bannerBox, 1, 4, 1, 1, CLASS_CS_PROMPT, ENABLED);
         
         //BUILD OTHER BANNER OBJECTS
-        csBuilder.buildComboBox(this, bannerBox, 1, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
-        csBuilder.buildComboBox(this, bannerBox, 1, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
-        csBuilder.buildComboBox(this, bannerBox, 3, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
-        csBuilder.buildComboBox(this, bannerBox, 3, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
+        csBuilder.buildComboBox(this, bannerBox, 1, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, SUBJECT_OPTIONS, CS_TAB_DEFAULT_SUBJECT);
+        csBuilder.buildComboBox(this, bannerBox, 1, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, NUMBER_OPTIONS, CS_TAB_DEFAULT_NUMBER);
+        csBuilder.buildComboBox(this, bannerBox, 3, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, SEMESTER_OPTIONS, CS_TAB_DEFAULT_SEMESTER);
+        csBuilder.buildComboBox(this, bannerBox, 3, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, YEAR_OPTIONS, CS_TAB_DEFAULT_YEAR);
         
         csBuilder.buildTextField(this, bannerBox, 1, 3, 3, 1, CLASS_CS_TEXT_FIELD, ENABLED);
         
@@ -100,6 +102,7 @@ public class CourseSiteTabWorkspace {
         //PAGES BOX STYLING
         pagesBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
         pagesBox.setSpacing(30.0);
+        pagesBox.setAlignment(Pos.CENTER_LEFT);
         
         
         //BUILD STYLE BOX
@@ -117,8 +120,10 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildTextButton(CS_TAB_RIGHT_FOOTER_BUTTON, styleBox, 0, 4, 1, 1, CLASS_CS_BUTTON, ENABLED);
         
         //BUILD IMAGES
-        //BUILD CHECKBOXES
-        csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 4, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
+        //BUILD COMBOBOXES
+        ComboBox style = csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 4, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
+        style.getItems().add("sea_wolf.css");
+        
         
         //STYLE BOX STYLING
         styleBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -153,6 +158,8 @@ public class CourseSiteTabWorkspace {
         instructorBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
         instructorBox.setHgap(10); 
         instructorBox.setVgap(10);
+        ohBox.setAlignment(Pos.CENTER_LEFT);
+        ohBox.setSpacing(5.0);
         
         //SITE TAB STYLING
         sitePane.paddingProperty().setValue(new Insets(3.0, 0.0, 0.0, 1.0));
