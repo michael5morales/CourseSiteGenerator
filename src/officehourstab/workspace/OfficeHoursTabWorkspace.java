@@ -230,14 +230,13 @@ public class OfficeHoursTabWorkspace {
             controller.processRemoveTA();
         });
         ((ComboBox) gui.getGUINode(OH_START_TIME_COMBO_BOX)).setOnAction(e -> {
-            System.out.print("START");
-            
+            controller.processToggleTime();
             app.getFoolproofModule().updateControls(OH_FOOLPROOF_SETTINGS);
         });
         ((ComboBox) gui.getGUINode(OH_END_TIME_COMBO_BOX)).setOnAction(e -> {
-            System.out.print("END");
-           
+            controller.processToggleTime();
         });
+        
         
         TableView officeHoursTableView = (TableView) gui.getGUINode(OH_OFFICE_HOURS_TABLE_VIEW);
         officeHoursTableView.getSelectionModel().setCellSelectionEnabled(true);

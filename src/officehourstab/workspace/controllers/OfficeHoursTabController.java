@@ -81,19 +81,29 @@ public class OfficeHoursTabController {
 
     }
     
-    public void processToggleStartTime() {
+    public void processToggleTime() {
+        AppGUIModule gui = app.getGUIModule();
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
         
+        ComboBox startBox = (ComboBox) app.getGUIModule().getGUINode(OH_START_TIME_COMBO_BOX);
+        ComboBox endBox = (ComboBox) app.getGUIModule().getGUINode(OH_END_TIME_COMBO_BOX);
+        
+        String startTime = (String)startBox.getValue();
+        String endTime = (String)endBox.getValue();
+        data.updateTable(startTime, endTime);
     }
 
     public void processToggleOfficeHours() {
         AppGUIModule gui = app.getGUIModule();
         TableView<TimeSlot> officeHoursTableView = (TableView) gui.getGUINode(OH_OFFICE_HOURS_TABLE_VIEW);
         ObservableList<TablePosition> selectedCells = officeHoursTableView.getSelectionModel().getSelectedCells();
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
         if (selectedCells.size() > 0) {
             TablePosition cell = selectedCells.get(0);
             int cellColumnNumber = cell.getColumn();
-            CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
-            OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
+            
             if (data.isDayOfWeekColumn(cellColumnNumber)) {
                 DayOfWeek dow = data.getColumnDayOfWeek(cellColumnNumber);
                 TableView<TeachingAssistantPrototype> taTableView = (TableView)gui.getGUINode(OH_TAS_TABLE_VIEW);
@@ -111,27 +121,11 @@ public class OfficeHoursTabController {
             int row = cell.getRow();
             cell.getTableView().refresh();
         }
+        data.updateOH();
     }
 
     public void processTypeTA() {
         app.getFoolproofModule().updateControls(OH_FOOLPROOF_SETTINGS);
-    }
-
-    public void processChangeStartTime() {
-        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
-        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData(); 
-        
-        ComboBox startBox = (ComboBox) app.getGUIModule().getGUINode(OH_START_TIME_COMBO_BOX);
-        String startTime = (String)startBox.getValue();
-        
-        
-    }
-    
-    public void processChangeEndTime() {
-        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
-        OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();    
-        
-        ComboBox endBox = (ComboBox) app.getGUIModule().getGUINode(OH_END_TIME_COMBO_BOX);
     }
     
     public void processEditTA() {

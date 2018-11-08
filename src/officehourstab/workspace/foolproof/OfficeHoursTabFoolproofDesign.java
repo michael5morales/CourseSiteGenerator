@@ -106,6 +106,7 @@ public class OfficeHoursTabFoolproofDesign implements FoolproofDesign {
         }
         
         endTimes.setItems(endList);
+        endTimes.getSelectionModel().selectLast();
     }
     
     private void updateRemoveTAFoolproofDesign() {

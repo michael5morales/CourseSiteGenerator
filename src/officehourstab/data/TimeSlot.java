@@ -189,6 +189,7 @@ public class TimeSlot {
             addTA(dow, ta);
             ta.changeTimeSlotCount(1);
         }
+        
     }
 
     public Iterator<TeachingAssistantPrototype> getTAsIterator(DayOfWeek dow) {

@@ -69,6 +69,7 @@ public class OfficeHoursData implements AppDataComponent {
         // GET THE LIST OF TAs FOR THE LEFT TABLE
         TableView<TeachingAssistantPrototype> taTableView = (TableView)gui.getGUINode(OH_TAS_TABLE_VIEW);
         teachingAssistants = taTableView.getItems();
+        allOH = new ArrayList<>();
         
         // THESE ARE THE DEFAULT OFFICE HOURS
         startHour = MIN_START_HOUR;
@@ -120,6 +121,9 @@ public class OfficeHoursData implements AppDataComponent {
             officeHours.add(halfTimeSlot);
         }
         
+        for (TimeSlot tslot : officeHours) {
+            allOH.add(tslot);
+        }
     }
     
     private String getTimeString(int militaryHour, boolean onHour) {
@@ -146,12 +150,48 @@ public class OfficeHoursData implements AppDataComponent {
         int timeInteger = 0;
         
         timeInteger += Integer.parseInt(time.substring(0 , time.length() - 6));
+        if (!time.substring(0, 2).equals("12")) {
+            if (time.substring(time.length() - 3).contains("pm")) {
+                timeInteger += 12;
+            }
+        } 
         
-        if (time.substring(5).equals("pm")) {
-            timeInteger += 12;
-        }
-      
         return timeInteger;
+    }
+    
+    public void updateOH() {
+        for (int i = 0; i < allOH.size(); i++) {
+            for (TimeSlot tslot : officeHours) {
+                if (allOH.get(i).getStartTime().equals(tslot.getStartTime())) {
+                    allOH.remove(i);
+                    allOH.add(i, tslot);
+                }
+            }
+        }
+    }
+    
+    public void updateTable(String startTime, String endTime) {
+        officeHours.clear();
+        for (int i = 0; i < allOH.size(); i++) {
+            String startString = allOH.get(i).getStartTime();
+            startString+= "a";
+            String endString = allOH.get(i).getEndTime();
+            if (endTime == null || endTime.isEmpty()) {
+                endTime = "9:00 pm";
+            }
+            endString+= "a";
+            int time1 = getTimeInt(startString);
+            int start = getTimeInt(startTime);
+            
+            int time2 = getTimeInt(endString);
+            int end = getTimeInt(endTime);
+            
+            if (time1 >= start && time2 <= end) {
+                officeHours.add(allOH.get(i));
+            } 
+            
+        }
+         
     }
     
     public void initHours(String startHourText, String endHourText) {
