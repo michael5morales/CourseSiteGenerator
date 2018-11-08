@@ -178,6 +178,7 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildLabel(CS_TAB_OFFICE_HOURS_LABEL, ohBox, CLASS_CS_PROMPT, ENABLED);
         
         //BUILD TEXTAREA
+        csBuilder.buildTextArea(this, instructorBox, 0, 5, 4, 4, EMPTY_TEXT, ENABLED);
         
         //INSTRUCTOR BOX STYLING
         instructorBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));

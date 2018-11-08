@@ -24,6 +24,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,17 +66,58 @@ public class AppNodesBuilder {
         return checkBox;
     }
     
-    public RadioButton buildRadioButton(Object nodeId,
-            Pane parentPane,
-            String styleClass,
-            boolean enabled){
+    private RadioButton initRadioButton(ToggleGroup tg, boolean selected) {
+        RadioButton button = new RadioButton();
+                
+        // PUT THE BUTTON INTO ITS PROPER TOGGLE GROUP
+        button.setToggleGroup(tg);
         
-        RadioButton radioButton = new RadioButton();
-        initNode(nodeId.toString(), radioButton, parentPane, styleClass, enabled);
+        // IS IT SELECTED?
+        button.setSelected(selected);
         
-        initLabeledNode(nodeId, radioButton);
-        return radioButton;
+        return button;
     }
+    
+    public RadioButton buildRadioButton(Object nodeId,
+                                            Pane parentPane,
+                                            String styleClass,
+                                            boolean enabled,
+                                            ToggleGroup tg,
+                                            boolean selected) {
+        // NOW MAKE THE TOGGLE BUTTON
+        RadioButton button = initRadioButton(tg, selected);
+
+        // INITIALIZE THE OTHER SETTINGS
+        this.initNode(nodeId, button, parentPane, styleClass, enabled);
+
+        // MAKE SURE THE LANGUAGE MANAGER HAS IT
+        // SO THAT IT CAN CHANGE THE LANGUAGE AS NEEDED
+        initLabeledNode(nodeId, button);
+
+        // AND RETURN THE COMPLETED BUTTON
+        return button;       
+    }
+    
+    public RadioButton buildRadioButton(Object nodeId,
+            GridPane parent,
+            int col, int row, int colSpan, int rowSpan,
+            String styleClass,
+            boolean enabled,
+            ToggleGroup tg,
+            boolean selected) {
+        // NOW MAKE THE TOGGLE BUTTON
+        RadioButton button = initRadioButton(tg, selected);
+
+        // INITIALIZE THE OTHER SETTINGS
+        initNode(nodeId, button, parent, col, row, colSpan, rowSpan, styleClass, enabled);
+
+        // MAKE SURE THE LANGUAGE MANAGER HAS IT
+        // SO THAT IT CAN CHANGE THE LANGUAGE AS NEEDED
+        initLabeledNode(nodeId, button);
+
+        // AND RETURN THE COMPLETED BUTTON
+        return button;
+    }    
     
         public CheckBox buildCheckBox(Object nodeId,
             GridPane parent,
@@ -93,6 +135,25 @@ public class AppNodesBuilder {
         return checkBox;
     }
 
+    public TextArea buildTextArea(Object nodeId,
+            Pane parentPane,
+            String styleClass,
+            boolean enabled) {
+        TextArea textArea = new TextArea();
+        initNode(nodeId, textArea, parentPane, styleClass, enabled);
+        return textArea;
+    }    
+    
+    public TextArea buildTextArea(Object nodeId,
+            GridPane parent,
+            int col, int row, int colSpan, int rowSpan,
+            String styleClass,
+            boolean enabled) {
+        TextArea textArea = new TextArea();
+        initNode(nodeId, textArea, parent, col, row, colSpan, rowSpan, styleClass, enabled);
+        return textArea;
+    }        
+    
     public ColorPicker buildColorPicker(Object nodeId,
             Pane parentPane,
             String styleClass,

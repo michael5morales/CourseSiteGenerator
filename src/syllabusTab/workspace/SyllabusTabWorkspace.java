@@ -65,6 +65,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_DESCRIPTION_LABEL, descriptionLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        csBuilder.buildTextArea(this, descriptionBox, EMPTY_TEXT, ENABLED);
         
         //TOPICS BOX STYLING
         descriptionBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -80,6 +81,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_TOPICS_LABEL, topicsLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, topicsBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         topicsBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -95,6 +97,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_PREREQUISITES_LABEL, prereqLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, prereqBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         prereqBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -110,6 +113,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_OUTCOMES_LABEL, outcomesLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, outcomesBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         outcomesBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -125,6 +129,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_TEXTBOOKS_LABEL, textbooksLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, textbooksBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         textbooksBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -140,6 +145,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_GRADED_COMPONENTS_LABEL, componentsLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, componentsBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         componentsBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -155,6 +161,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_GRADING_NOTE_LABEL, noteLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, noteBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         noteBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -170,6 +177,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_ACADEMIC_DISHONESTY_LABEL, academicLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, academicBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         academicBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -185,6 +193,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildLabel(SYLLABUS_TAB_SPECIAL_ASSISTANCE_LABEL, specialLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         //BUILD TEXTAREA
+        //csBuilder.buildTextArea(this, specialBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
         specialBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
