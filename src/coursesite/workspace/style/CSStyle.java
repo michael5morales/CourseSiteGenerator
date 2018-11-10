@@ -33,5 +33,15 @@ public class CSStyle {
     public static final String CLASS_CS_CHECKBOX = "cs_check_box";
     public static final String CLASS_MT_TABLE_VIEW = "mt_table_view";
     public static final String CLASS_OH_RADIO_BUTTON = "oh_radio_button";
+    public static final String CLASS_OH_TEXT_FIELD_ERROR = "oh_text_field_error";
+    
+    // FOR THE DIALOG
+    public static final String CLASS_OH_DIALOG_GRID_PANE = "oh_dialog_grid_pane";
+    public static final String CLASS_OH_DIALOG_HEADER = "oh_dialog_header"; 
+    public static final String CLASS_OH_DIALOG_PROMPT = "oh_dialog_prompt"; 
+    public static final String CLASS_OH_DIALOG_TEXT_FIELD = "oh_dialog_text_field";
+    public static final String CLASS_OH_DIALOG_RADIO_BUTTON = "oh_dialog_radio_button";
+    public static final String CLASS_OH_DIALOG_BOX = "oh_dialog_box";
+    public static final String CLASS_OH_DIALOG_BUTTON = "oh_dialog_button";
 }
 

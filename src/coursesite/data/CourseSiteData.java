@@ -9,6 +9,7 @@ import coursesite.CourseSiteApp;
 import djf.components.AppDataComponent;
 import djf.modules.AppGUIModule;
 import officehourstab.data.OfficeHoursData;
+import syllabusTab.data.SyllabusTabData;
 
 /**
  *
@@ -17,12 +18,14 @@ import officehourstab.data.OfficeHoursData;
 public class CourseSiteData implements AppDataComponent{
     CourseSiteApp app;
     AppDataComponent officeHoursData;
+    AppDataComponent syllabusTabData;
     
      public CourseSiteData(CourseSiteApp initApp) {
         // KEEP THIS FOR LATER
         app = initApp;
         AppGUIModule gui = app.getGUIModule();
         officeHoursData = new OfficeHoursData(initApp);
+        syllabusTabData = new SyllabusTabData(initApp);
      }
      
      /**
@@ -36,5 +39,9 @@ public class CourseSiteData implements AppDataComponent{
     
     public AppDataComponent getOfficeHoursData() {
         return officeHoursData;
+    }
+    
+    public AppDataComponent getSyllabusTabData() {
+        return syllabusTabData;
     }
 }
