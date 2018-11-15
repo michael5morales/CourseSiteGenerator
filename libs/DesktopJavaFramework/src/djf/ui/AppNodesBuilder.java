@@ -141,6 +141,7 @@ public class AppNodesBuilder {
             boolean enabled) {
         TextArea textArea = new TextArea();
         textArea.managedProperty().set(enabled);
+        textArea.wrapTextProperty().setValue(true);
         initNode(nodeId, textArea, parentPane, styleClass, enabled);
         return textArea;
     }    
@@ -152,6 +153,7 @@ public class AppNodesBuilder {
             boolean enabled) {
         TextArea textArea = new TextArea();
         textArea.managedProperty().set(enabled);
+        textArea.wrapTextProperty().setValue(true);
         initNode(nodeId, textArea, parent, col, row, colSpan, rowSpan, styleClass, enabled);
         return textArea;
     }        
