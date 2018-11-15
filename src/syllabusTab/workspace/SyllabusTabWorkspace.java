@@ -7,17 +7,20 @@ package syllabusTab.workspace;
 
 import coursesite.CourseSiteApp;
 import static coursesite.workspace.style.CSStyle.*;
+import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import static syllabusTab.SyllabusTabPropertyType.*;
 import djf.ui.AppNodesBuilder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import properties_manager.PropertiesManager;
+import syllabusTab.workspace.controllers.SyllabusTabController;
 
 /**
  *
@@ -216,7 +219,36 @@ public class SyllabusTabWorkspace {
     }
     
     private void initControllers() {
+        SyllabusTabController controller = new SyllabusTabController((CourseSiteApp) app);
+        AppGUIModule gui = app.getGUIModule();
         
+        ((Button) gui.getGUINode(SYLLABUS_TAB_DESCRIPTION_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_DESCRIPTION_TEXT_AREA, SYLLABUS_TAB_DESCRIPTION_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_TOPICS_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_TOPICS_TEXT_AREA, SYLLABUS_TAB_TOPICS_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_PREREQUISITES_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_PREREQUISITES_TEXT_AREA, SYLLABUS_TAB_PREREQUISITES_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_OUTCOMES_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_OUTCOMES_TEXT_AREA, SYLLABUS_TAB_OUTCOMES_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_TEXTBOOKS_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_TEXTBOOKS_TEXT_AREA, SYLLABUS_TAB_TEXTBOOKS_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_GRADED_COMPONENTS_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_GRADED_COMPONENTS_TEXT_AREA, SYLLABUS_TAB_GRADED_COMPONENTS_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_GRADED_NOTE_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_GRADED_NOTE_TEXT_AREA, SYLLABUS_TAB_GRADED_NOTE_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_ACADEMIC_DISHONESTY_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_ACADEMIC_DISHONESTY_TEXT_AREA, SYLLABUS_TAB_ACADEMIC_DISHONESTY_PLUS_BUTTON);
+        });
+        ((Button) gui.getGUINode(SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA, SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON);
+        });
     }
     
     private void initFoolproofDesign() {

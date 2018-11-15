@@ -140,6 +140,7 @@ public class AppNodesBuilder {
             String styleClass,
             boolean enabled) {
         TextArea textArea = new TextArea();
+        textArea.managedProperty().set(enabled);
         initNode(nodeId, textArea, parentPane, styleClass, enabled);
         return textArea;
     }    
@@ -150,6 +151,7 @@ public class AppNodesBuilder {
             String styleClass,
             boolean enabled) {
         TextArea textArea = new TextArea();
+        textArea.managedProperty().set(enabled);
         initNode(nodeId, textArea, parent, col, row, colSpan, rowSpan, styleClass, enabled);
         return textArea;
     }        
