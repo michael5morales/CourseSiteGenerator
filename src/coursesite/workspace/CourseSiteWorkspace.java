@@ -65,6 +65,9 @@ public class CourseSiteWorkspace extends AppWorkspaceComponent{
         ScheduleTabWorkspace scheduleTab = new ScheduleTabWorkspace((CourseSiteApp) app);
         tPane.getTabs().add(scheduleTab.scheduleTab);
             
+        tPane.setTabMinWidth(tPane.getWidth()/5.0);
+        
+        
         workspace = new BorderPane();
         
         ((BorderPane)workspace).setCenter(tPane);

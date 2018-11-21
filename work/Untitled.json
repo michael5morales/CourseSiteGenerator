@@ -1,0 +1,196 @@
+
+{
+    "siteTab":{
+        "subject":"AMS",
+        "number":"219",
+        "semester":"Fall",
+        "year":"2018",
+        "title":"Computer Science III",
+        "logos":{
+            "favicon":"file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldIcon.png",
+            "navbar":"file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUDarkRedShieldLogo.png",
+            "bottom_left":"file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldLogo.png",
+            "bottom_right":"file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUCSLogo.png"
+        },
+        "instructor":{
+            "name":"Richard Mckenna",
+            "link":"google.com",
+            "email":"rmckenna@stonybrook.edu",
+            "room":"NCS 106"
+        },
+        "pages":[
+            {
+                "name":"Syllabus"
+            },
+            {
+                "name":"HWs"
+            }
+        ]
+    },
+    "syllabusTab":{
+        "description":"Hello yall",
+        "topics":[
+            ""
+        ],
+        "prerequisites":"",
+        "outcomes":[
+            "Ability to systematically design, code, debug, and test programs of about two thousand lines of code.",
+            "Sensitivity to the issues of programming style and modularity and their relationship to the construction and evolution of robust software.",
+            "Knowledge of basic ideas and techniques of object-oriented programming.",
+            "Familiarity with the capabilities and use of programming tools such as syntax-directed editors, debuggers, execution profilers, documentation generators, and revison-control systems"
+        ],
+        "textbooks":"",
+        "gradedComponents":"",
+        "gradingNote":"",
+        "academicDishonesty":"",
+        "specialAssistance":""
+    },
+    "meetingTimesTab":{
+        "lectures":[
+            {
+                "section":  "L01",
+                "days":     "Tuesdays & Thursdays",
+                "time":     "10:00am-11:20pm",
+                "room":     "Humanities 1006"
+            }
+        ],
+        "labs": [
+            
+        ],
+        "recitations": [
+            {
+                "section": "R06",
+                "day_time": "Mondays, 10:00am-10:53am",
+                "location": "New CS 115", 
+                "ta_1": "Lei Song", 
+                "ta_2": "Qihong Jiang"         
+            },
+            {
+                "section": "R07",
+                "day_time": "Wednesdays, 10:00am-10:53am",
+                "location": "New CS 115", 
+                "ta_1": "Mankirat Gulati", 
+                "ta_2": "Sammi Wu Leung"         
+            },
+            {
+                "section": "R08",
+                "day_time": "Wednesdays, 2:30pm-3:23pm",
+                "location": "New CS 115", 
+                "ta_1": "Sammi Wu Leung", 
+                "ta_2": "Qihong Jiang"         
+            }
+        ]
+    },
+    "officeHoursTab":{
+        "startHour":"9",
+        "endHour":"20",
+        "instructor":{
+            "name":"Richard Mckenna",
+            "link":"google.com",
+            "email":"rmckenna@stonybrook.edu",
+            "room":"NCS 106"
+        },
+        "grad_tas":[
+            {
+                "name":"Michael MOrales",
+                "email":"michael@oal.com",
+                "type":"Graduate"
+            }
+        ],
+        "undergrad_tas":[
+        ],
+        "officeHours":[
+            {
+                "time":"10_30am",
+                "day":"MONDAY",
+                "name":"Michael MOrales"
+            },
+            {
+                "time":"10_30am",
+                "day":"WEDNESDAY",
+                "name":"Michael MOrales"
+            },
+            {
+                "time":"11_30am",
+                "day":"TUESDAY",
+                "name":"Michael MOrales"
+            }
+        ]
+    },
+    "scheduleTab":{
+        "holidays":[
+            { 
+                "month": "9", 
+                "day": "3", 
+                "title": "LABOR DAY",
+                "topic": ""
+            },
+            { 
+                "month": "10", 
+                "day": "8", 
+                "title": "FALL BREAK?<br /><br /><br />" ,
+                "topic": ""
+            },
+            { 
+                "month": "10", 
+                "day": "9", 
+                "title": "FALL BREAK?" ,
+                "topic": ""
+            },
+            { 
+                "month": "11", 
+                "day": "21", 
+                "title": "TRAVEL DAY" ,
+                "topic": ""
+            },
+            { 
+                "month": "11", 
+                "day": "22", 
+                "title": "THANKSGIVING" ,
+                "topic": ""
+            },
+            { 
+                "month": "11", 
+                "day": "23", 
+                "title": "BLACK FRIDAY" ,
+                "topic": ""
+            },
+            { 
+                "month": "12", 
+                "day": "11", 
+                "title": "READING DAY" ,
+                "topic": ""
+            }
+        ],
+        "lectures":[
+            { "month": "8",     "day": "28",     "title": "Lecture 1",      "topic": "Software<br />Development<br />Lifecycle<br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4583144-dt-content-rid-31807868_1/xid-31807868_1" },
+            { "month": "8",     "day": "30",     "title": "Lecture 2",      "topic": "Graphical<br />User<br />Interfaces<br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4588421-dt-content-rid-31820795_1/xid-31820795_1" },
+            { "month": "9",     "day": "4",     "title": "Lecture 3",      "topic": "Event<br />Programming<br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4591754-dt-content-rid-31835006_1/xid-31835006_1" },
+            { "month": "9",     "day": "6",     "title": "Lecture 4",      "topic": "Graphics<br />&amp; GUIs<br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4595769-dt-content-rid-31868074_1/xid-31868074_1" },
+            { "month": "9",     "day": "11",     "title": "Lecture 5",      "topic": "Threads<br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4598618-dt-content-rid-31897815_1/xid-31897815_1" },
+            { "month": "9",     "day": "13",     "title": "Lecture 6",      "topic": "Threads<br />(continued)<br /><br />",    "link": "none" },
+            { "month": "9",     "day": "18",     "title": "Lecture 7",      "topic": "Multithreading<br />Issues<br /><br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4598619-dt-content-rid-31897816_1/xid-31897816_1" },
+            { "month": "9",     "day": "20",     "title": "Lecture 8",      "topic": "Multithreading<br />(continued)<br /><br />",    "link": "none" },
+            { "month": "9",     "day": "25",     "title": "Lecture 9",      "topic": "Properties of<br />High Quality Software<br /><br />",    "link": "https://blackboard.stonybrook.edu/bbcswebdav/pid-4611824-dt-content-rid-32139187_1/xid-32139187_1" },
+        ],
+        "recitations":[
+            { "month": "9",     "day": "17",     "title": "Recitation 2",      "topic": "Version Control<br /><br />",    "link": "none" },
+            { "month": "9",     "day": "19",     "title": "Recitation 3",      "topic": "Canvas<br /><br />",    "link": "none" },
+            { "month": "9",     "day": "24",     "title": "Recitation 3",      "topic": "Canvas<br /><br />",    "link": "none" },
+            { "month": "9",     "day": "26",     "title": "Recitation 4",      "topic": "Front-End<br />Web Technologies<br /><br /><br />",    "link": "none" },
+            { "month": "10",     "day": "1",     "title": "Recitation 4",      "topic": "Front-End<br />Web Technologies<br /><br /><br />",    "link": "none" },
+            { "month": "10",     "day": "3",     "title": "Recitation 5",      "topic": "Threads<br /><br /><br />",    "link": "none" },
+            { "month": "10",     "day": "10",     "title": "NO RECITATION",      "topic": "<br />",    "link": "none" },
+            { "month": "10",     "day": "15",     "title": "Recitation 5",      "topic": "Threads<br /><br />",    "link": "none" },
+            { "month": "10",     "day": "17",     "title": "Recitation 6",      "topic": "UML<br />Diagrams<br /><br />",    "link": "none" },
+        ],
+        "hws":[
+            { "month": "9", "day": "21",    "title": "<a href='./hw/HW1.html'>HW 1</a><br />(<a href='https://blackboard.stonybrook.edu/bbcswebdav/pid-4611779-dt-content-rid-32136873_1/xid-32136873_1'>Solutions</a>)",    "topic": "due @ 11:59pm<br />(GUIs &amp; Events)",      "link": "./hw/HW1.html",     "time": "",  "criteria": "none"     },
+        { "month": "10", "day": "10",     "title": "<a href='./hw/HW2.html'>HW 2</a><br />(<a href='https://blackboard.stonybrook.edu/bbcswebdav/pid-4630510-dt-content-rid-32757913_1/xid-32757913_1'>Solutions</a>)",    "topic": "due @ 11:59pm<br />(GUIs &amp; Events)",      "link": "none",     "time": "",  "criteria": "none"     },
+        { "month": "10", "day": "26",    "title": "HW 3",    "topic": "due @ 11:59pm<br />(UML Design)",      "link": "./hw/HW3.html",     "time": "",  "criteria": "none"     },
+        { "month": "11", "day": "7",    "title": "HW 4",    "topic": "due @ 11:59pm<br />Implementation<br />Benchmark I",      "link": "./hw/HW4.html",     "time": "",  "criteria": "none"     },
+        { "month": "11", "day": "20",    "title": "HW 5",    "topic": "due @ 11:59pm<br />Implementation<br />Benchmark II",      "link": "./hw/HW5.html",     "time": "",  "criteria": "none"     },
+        { "month": "12", "day": "10",    "title": "Final Project",    "topic": "due @ 11:59pm<br />(JavaFX App)",      "link": "none",     "time": "",  "criteria": "none"     }
+        ]
+    }
+}

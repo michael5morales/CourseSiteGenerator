@@ -6,11 +6,14 @@
 package meetingtimestab.workspace;
 
 import coursesite.CourseSiteApp;
+import coursesite.data.CourseSiteData;
 import static coursesite.workspace.style.CSStyle.*;
+import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -20,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import static meetingtimestab.MeetingTimesTabPropertyType.*;
 import meetingtimestab.data.LectureMeetingType;
+import meetingtimestab.data.MeetingTimesTabData;
 import meetingtimestab.data.RecitationLabMeetingType;
 import properties_manager.PropertiesManager;
 
@@ -103,10 +107,10 @@ public class MeetingTimesTabWorkspace {
         TableColumn recitationTA1Column = csBuilder.buildTableColumn(MEETING_TIMES_TAB_RECITATIONS_TA1_COLUMN, recitationsTable, CLASS_OH_COLUMN);
         TableColumn recitationTA2Column = csBuilder.buildTableColumn(MEETING_TIMES_TAB_RECITATIONS_TA2_COLUMN, recitationsTable, CLASS_OH_COLUMN);
         recitationSectionColumn.setCellValueFactory(new PropertyValueFactory<String, String>("section"));
-        recitationDayTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("daysAndTime"));
+        recitationDayTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("dayTime"));
         recitationRoomColumn.setCellValueFactory(new PropertyValueFactory<String, String>("room"));
-        recitationTA1Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta1"));
-        recitationTA2Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta2"));
+        recitationTA1Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta_1"));
+        recitationTA2Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta_2"));
         for (int i = 0; i < recitationsTable.getColumns().size(); i++) {
             ((TableColumn)recitationsTable.getColumns().get(i)).prefWidthProperty().bind(recitationsTable.widthProperty().multiply(1.0/5.0));
         }
@@ -132,10 +136,10 @@ public class MeetingTimesTabWorkspace {
         TableColumn labsTA1Column = csBuilder.buildTableColumn(MEETING_TIMES_TAB_LABS_TA1_COLUMN, labsTable, CLASS_OH_COLUMN);
         TableColumn labsTA2Column = csBuilder.buildTableColumn(MEETING_TIMES_TAB_LABS_TA2_COLUMN, labsTable, CLASS_OH_COLUMN);
         labsSectionColumn.setCellValueFactory(new PropertyValueFactory<String, String>("section"));
-        labsDayTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("daysAndTime"));
+        labsDayTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("dayTime"));
         labsRoomColumn.setCellValueFactory(new PropertyValueFactory<String, String>("room"));
-        labsTA1Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta1"));
-        labsTA2Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta2"));
+        labsTA1Column.setCellValueFactory(new PropertyValueFactory<String, String>("firstTA"));
+        labsTA2Column.setCellValueFactory(new PropertyValueFactory<String, String>("secondTA"));
         for (int i = 0; i < labsTable.getColumns().size(); i++) {
             ((TableColumn)labsTable.getColumns().get(i)).prefWidthProperty().bind(labsTable.widthProperty().multiply(1.0/5.0));
         }
@@ -147,8 +151,8 @@ public class MeetingTimesTabWorkspace {
         labsBox.setSpacing(5.0);
         
         //MEETING TIMES TAB STYLING
-        meetingTimesPane.paddingProperty().setValue(new Insets(3.0, 1.0, 1.0, 1.0));
-        meetingTimesPane.setSpacing(3.0);
+        meetingTimesPane.paddingProperty().setValue(new Insets(5.0, 5.0, 5.0, 5.0));
+        meetingTimesPane.setSpacing(5.0);
         
         scrollPane.setContent(meetingTimesPane);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -162,6 +166,7 @@ public class MeetingTimesTabWorkspace {
     }
     
     public void initControllers() {
+        AppGUIModule gui = app.getGUIModule();
         
     }
     

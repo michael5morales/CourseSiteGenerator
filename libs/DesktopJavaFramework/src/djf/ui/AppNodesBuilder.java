@@ -4,6 +4,7 @@ import static djf.AppTemplate.PATH_ICONS;
 import djf.modules.AppGUIModule;
 import djf.modules.AppLanguageModule;
 import static djf.modules.AppLanguageModule.FILE_PROTOCOL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -13,6 +14,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.Slider;
@@ -158,6 +160,27 @@ public class AppNodesBuilder {
         return textArea;
     }        
     
+    public DatePicker buildDatePicker(Object nodeId,
+            Pane parentPane,
+            String styleClass,
+            boolean enabled) {
+        DatePicker datePicker = new DatePicker();
+        datePicker.setValue(LocalDate.now());
+        initNode(nodeId, datePicker, parentPane, styleClass, enabled);        
+        return datePicker;
+    }
+    
+    public DatePicker buildDatePicker(Object nodeId,
+            GridPane parent,
+            int col, int row, int colSpan, int rowSpan,
+            String styleClass,
+            boolean enabled) {
+        DatePicker datePicker = new DatePicker();
+        datePicker.setValue(LocalDate.now());
+        initNode(nodeId, datePicker, parent, col, row, colSpan, rowSpan, styleClass, enabled);        
+        return datePicker;
+    }
+    
     public ColorPicker buildColorPicker(Object nodeId,
             Pane parentPane,
             String styleClass,
@@ -207,6 +230,7 @@ public class AppNodesBuilder {
             Object defaultValueProperty) {
         // LOAD THE OPTIONS INTO THE COMBO BOX
         ComboBox comboBox = new ComboBox();
+        comboBox.setEditable(true);
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         ObservableList<String> items = comboBox.getItems();
         ArrayList<String> propertyOptions = props.getPropertyOptionsList(optionsListProperty);

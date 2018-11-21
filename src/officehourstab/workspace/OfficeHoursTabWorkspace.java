@@ -153,9 +153,9 @@ public class OfficeHoursTabWorkspace {
         endBox.setAlignment(Pos.CENTER_LEFT);
         
         //OFFICE HOURS TAB STYLING
-        officeHoursBox.paddingProperty().setValue(new Insets(3.0, 3.0, 3.0, 3.0));
-        officeHoursBox.setSpacing(3.0);
-        officeHoursPane.paddingProperty().setValue(new Insets(3.0, 3.0, 3.0, 3.0));
+        officeHoursBox.paddingProperty().setValue(new Insets(5.0, 5.0, 5.0, 5.0));
+        officeHoursBox.setSpacing(5.0);
+        officeHoursPane.paddingProperty().setValue(new Insets(5.0, 5.0, 5.0, 5.0));
         
         scrollPane.setContent(officeHoursPane);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

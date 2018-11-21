@@ -73,6 +73,80 @@
         <!-- ENGLISH LANGUAGE SETTINGS SPECIFICALLY FOR TDLM CONTROLS -->
 
         <!-- LANGUAGE-DEPENDENT TEXT FOR OH WORKSPACE CONTROLS -->
+        <property name="CS_TAB_BANNER_LABEL_TEXT"           value="Banner"></property>
+        <property name="CS_TAB_BANNER_SUBJECT_LABEL_TEXT"           value="Subject:"></property>
+        <property name="CS_TAB_BANNER_NUMBER_LABEL_TEXT"           value="Number:"></property>
+        <property name="CS_TAB_BANNER_SEMESTER_LABEL_TEXT"           value="Semester:"></property>
+        <property name="CS_TAB_BANNER_YEAR_LABEL_TEXT"           value="Year:"></property>
+        <property name="CS_TAB_BANNER_TITLE_LABEL_TEXT"           value="Title:"></property>
+        <property name="CS_TAB_BANNER_EXPORT_LABEL_TEXT"           value="Export Dir:"></property>
+        <property name="CS_TAB_PAGES_LABEL_TEXT"           value="Pages"></property>
+        <property name="CS_TAB_HOME_CHECK_BOX_TEXT"           value="Home"></property>
+        <property name="CS_TAB_SYLLABUS_CHECK_BOX_TEXT"           value="Syllabus"></property>
+        <property name="CS_TAB_SCHEDULE_CHECK_BOX_TEXT"           value="Schedule"></property>
+        <property name="CS_TAB_HWS_CHECK_BOX_TEXT"           value="HWs"></property>
+        <property name="CS_TAB_STYLE_LABEL_TEXT"           value="Style"></property>
+        <property name="CS_TAB_FONTS_LABEL_TEXT"           value="Fonts &amp; Colors Style Sheet:"></property>
+        <property name="CS_TAB_NOTE_LABEL_TEXT"           value="Note: Stylesheets should be placed inside work/css to be selectable"></property>
+        <property name="CS_TAB_ICON_BUTTON_TEXT"           value="Favicon:"></property>
+        <property name="CS_TAB_NAV_IMAGE_BUTTON_TEXT"           value="Navbar Image:"></property>
+        <property name="CS_TAB_LEFT_FOOTER_BUTTON_TEXT"           value="Left Footer Image:"></property>
+        <property name="CS_TAB_RIGHT_FOOTER_BUTTON_TEXT"           value="Right Footer Image:"></property>
+        <property name="CS_TAB_INSTRUCTOR_LABEL_TEXT"           value="Instructor"></property>
+        <property name="CS_TAB_NAME_LABEL_TEXT"           value="Name:"></property>
+        <property name="CS_TAB_EMAIL_LABEL_TEXT"           value="Email:"></property>
+        <property name="CS_TAB_ROOM_LABEL_TEXT"           value="Room:"></property>
+        <property name="CS_TAB_HOME_PAGE_LABEL_TEXT"           value="Home Page:"></property>
+        <property name="CS_TAB_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="CS_TAB_OFFICE_HOURS_LABEL_TEXT"           value="Office Hours"></property>
+        <property name="CS_TAB_DEFAULT_SUBJECT"           value="CSE"></property>
+        <property name="CS_TAB_DEFAULT_NUMBER"           value="219"></property>
+        <property name="CS_TAB_DEFAULT_SEMESTER"           value="Fall"></property>
+        <property name="CS_TAB_DEFAULT_YEAR"           value="2018"></property>
+        
+        <property name="SYLLABUS_TAB_DESCRIPTION_PLUS_BUTTON_TEXT"           value="-"></property>
+        <property name="SYLLABUS_TAB_TOPICS_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_PREREQUISITES_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_OUTCOMES_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_TEXTBOOKS_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_GRADED_COMPONENTS_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_GRADED_NOTE_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_ACADEMIC_DISHONESTY_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON_TEXT"           value="+"></property>
+        <property name="SYLLABUS_TAB_DESCRIPTION_LABEL_TEXT"           value="Description:"></property>
+        <property name="SYLLABUS_TAB_TOPICS_LABEL_TEXT"           value="Topics:"></property>
+        <property name="SYLLABUS_TAB_PREREQUISITES_LABEL_TEXT"           value="Prerequisites:"></property>
+        <property name="SYLLABUS_TAB_OUTCOMES_LABEL_TEXT"           value="Outcomes:"></property>
+        <property name="SYLLABUS_TAB_TEXTBOOKS_LABEL_TEXT"           value="Textbooks:"></property>
+        <property name="SYLLABUS_TAB_GRADED_COMPONENTS_LABEL_TEXT"           value="Graded Components:"></property>
+        <property name="SYLLABUS_TAB_GRADING_NOTE_LABEL_TEXT"           value="Grading Note:"></property>
+        <property name="SYLLABUS_TAB_ACADEMIC_DISHONESTY_LABEL_TEXT"           value="Academic Dishonesty:"></property>
+        <property name="SYLLABUS_TAB_SPECIAL_ASSISTANCE_LABEL_TEXT"           value="Special Assistance:"></property>
+        
+        <property name="MEETING_TIMES_TAB_PLUS_BUTTON1_TEXT"           value="+"></property>
+        <property name="MEETING_TIMES_TAB_PLUS_BUTTON2_TEXT"           value="+"></property>
+        <property name="MEETING_TIMES_TAB_PLUS_BUTTON3_TEXT"           value="+"></property>
+        <property name="MEETING_TIMES_TAB_MINUS_BUTTON1_TEXT"           value="-"></property>
+        <property name="MEETING_TIMES_TAB_MINUS_BUTTON2_TEXT"           value="-"></property>
+        <property name="MEETING_TIMES_TAB_MINUS_BUTTON3_TEXT"           value="-"></property>
+        <property name="MEETING_TIMES_TAB_LECTURES_LABEL_TEXT"           value="Lectures"></property>
+        <property name="MEETING_TIMES_TAB_RECITATIONS_LABEL_TEXT"           value="Recitations"></property>
+        <property name="MEETING_TIMES_TAB_LABS_LABEL_TEXT"           value="Labs"></property>
+        <property name="MEETING_TIMES_TAB_RECITATIONS_SECTION_COLUMN_TEXT"           value="Section"></property>
+        <property name="MEETING_TIMES_TAB_RECITATIONS_DAY_TIME_COLUMN_TEXT"           value="Days &amp; Time"></property>
+        <property name="MEETING_TIMES_TAB_RECITATIONS_ROOM_COLUMN_TEXT"           value="Room"></property>
+        <property name="MEETING_TIMES_TAB_RECITATIONS_TA1_COLUMN_TEXT"           value="TA1"></property>
+        <property name="MEETING_TIMES_TAB_RECITATIONS_TA2_COLUMN_TEXT"           value="TA2"></property>
+        <property name="MEETING_TIMES_TAB_LABS_SECTION_COLUMN_TEXT"           value="Section"></property>
+        <property name="MEETING_TIMES_TAB_LABS_DAY_TIME_COLUMN_TEXT"           value="Days &amp; Time"></property>
+        <property name="MEETING_TIMES_TAB_LABS_ROOM_COLUMN_TEXT"           value="Room"></property>
+        <property name="MEETING_TIMES_TAB_LABS_TA1_COLUMN_TEXT"           value="TA1"></property>
+        <property name="MEETING_TIMES_TAB_LABS_TA2_COLUMN_TEXT"           value="TA2"></property>
+        <property name="MEETING_TIMES_TAB_LECTURES_SECTION_COLUMN_TEXT"           value="Section"></property>
+        <property name="MEETING_TIMES_TAB_LECTURES_DAYS_COLUMN_TEXT"           value="Days"></property>
+        <property name="MEETING_TIMES_TAB_LECTURES_TIME_COLUMN_TEXT"           value="Time"></property>
+        <property name="MEETING_TIMES_TAB_LECTURES_ROOM_COLUMN_TEXT"           value="Room"></property>
+        
         <property name="OH_TAS_HEADER_LABEL_TEXT"           value="Teaching Assistants"></property>
         <property name="OH_NAME_TEXT_FIELD_PROMPT_TEXT"            value="Name"></property>
         <property name="OH_EMAIL_TEXT_FIELD_PROMPT_TEXT"           value="Email"></property>
@@ -98,11 +172,48 @@
         <property name="OH_WEDNESDAY_TABLE_COLUMN_TEXT"     value="Wednesday"></property>
         <property name="OH_THURSDAY_TABLE_COLUMN_TEXT"      value="Thursday"></property>
         <property name="OH_FRIDAY_TABLE_COLUMN_TEXT"        value="Friday"></property>
+        <property name="OH_MINUS_BUTTON_TEXT"        value="-"></property>
+        <property name="OH_TAS_LABEL_TEXT"        value="Tas"></property>
+        <property name="OH_START_TIME_LABEL_TEXT"        value="Start Time:"></property>
+        <property name="OH_END_TIME_LABEL_TEXT"        value="End Time:"></property>
+        <property name="OH_DEFAULT_START_TIME"        value="9:00 am"></property>
+        <property name="OH_DEFAULT_END_TIME"        value="9:00 pm"></property>
+        
+        <property name="SCHEDULE_TAB_CALENDAR_LABEL_TEXT"        value="Calendar Boundaries"></property>
+        <property name="SCHEDULE_TAB_STARTING_LABEL_TEXT"        value="Starting Monday:"></property>
+        <property name="SCHEDULE_TAB_ENDING_LABEL_TEXT"        value="Ending Friday:"></property>
+        <property name="SCHEDULE_TAB_MINUS_BUTTON_TEXT"        value="-"></property>
+        <property name="SCHEDULE_TAB_SCHEDULE_LABEL_TEXT"        value="Schedule Items"></property>
+        <property name="SCHEDULE_TAB_TYPE_COLUMN_TEXT"        value="Type"></property>
+        <property name="SCHEDULE_TAB_DATE_COLUMN_TEXT"        value="Date"></property>
+        <property name="SCHEDULE_TAB_TITLE_COLUMN_TEXT"        value="Title"></property>
+        <property name="SCHEDULE_TAB_TOPIC_COLUMN_TEXT"        value="Topic"></property>
+        <property name="SCHEDULE_TAB_ADD_LABEL_TEXT"        value="Add/Edit"></property>
+        <property name="SCHEDULE_TAB_TYPE_LABEL_TEXT"        value="Type:"></property>
+        <property name="SCHEDULE_TAB_DATE_LABEL_TEXT"        value="Date:"></property>
+        <property name="SCHEDULE_TAB_TITLE_LABEL_TEXT"        value="Title:"></property>
+        <property name="SCHEDULE_TAB_TOPIC_LABEL_TEXT"        value="Topic:"></property>
+        <property name="SCHEDULE_TAB_LINK_LABEL_TEXT"        value="Link:"></property>
+        <property name="SCHEDULE_TAB_ADD_BUTTON_TEXT"        value="Add/Update"></property>
+        <property name="SCHEDULE_TAB_CLEAR_BUTTON_TEXT"        value="Clear"></property>
+        <property name="SCHEDULE_TAB_TITLE_TEXT_AREA_TEXT"        value="Title"></property>
+        <property name="SCHEDULE_TAB_TOPIC_TEXT_AREA_TEXT"        value="Topic"></property>
+        <property name="SCHEDULE_TAB_LINK_TEXT_AREA_TEXT"        value="Link"></property>
         
         <!-- ERROR DIALOG -->
         <property name="OH_NO_TA_SELECTED_TITLE"        value="No TA Selected"></property>
         <property name="OH_NO_TA_SELECTED_CONTENT"      value="Toggle only possible if TA Selected"></property>
 
+        <!-- EDIT TA DIALOG -->
+        <property name="OH_TA_DIALOG_HEADER_LABEL_TEXT" value="Edit Teaching Assistant"></property>
+        <property name="OH_TA_DIALOG_NAME_LABEL_TEXT" value="Name: "></property>
+        <property name="OH_TA_DIALOG_EMAIL_LABEL_TEXT" value="Email: "></property>
+        <property name="OH_TA_DIALOG_TYPE_LABEL_TEXT" value="Type: "></property>
+        <property name="OH_TA_DIALOG_GRAD_RADIO_BUTTON_TEXT" value="Graduate"></property>
+        <property name="OH_TA_DIALOG_UNDERGRAD_RADIO_BUTTON_TEXT" value="Undergraduate"></property>
+        <property name="OH_TA_DIALOG_OK_BUTTON_TEXT" value="Ok"></property>
+        <property name="OH_TA_DIALOG_CANCEL_BUTTON_TEXT" value="Cancel"></property>
+        
         <!-- TO SWITCH BACK TO ANOTHER LANGUAGE -->
         <property name="LANGUAGE_DIALOG_TITLE"          value="App Language Selection"></property>
         <property name="LANGUAGE_DIALOG_HEADER_TEXT"    value="Choose a Language"></property>
@@ -119,5 +230,50 @@
             <option>English</option>
             <option>Spanish</option>
         </property_options>
+        
+        <property_options name="TIME_OPTIONS">
+            <option>9:00 am</option>
+            <option>10:00 am</option>
+            <option>11:00 am</option>
+            <option>12:00 pm</option>
+            <option>1:00 pm</option>
+            <option>2:00 pm</option>
+            <option>3:00 pm</option>
+            <option>4:00 pm</option>
+            <option>5:00 pm</option>
+            <option>6:00 pm</option>
+            <option>7:00 pm</option>
+            <option>8:00 pm</option>
+            <option>9:00 pm</option>
+        </property_options>
+        
+        <property_options name="SUBJECT_OPTIONS">
+            <option>CSE</option>
+            <option>AMS</option>
+            <option>ISE</option>
+        </property_options>
+        
+        <property_options name="NUMBER_OPTIONS">
+            <option>101</option>
+            <option>114</option>
+            <option>214</option>
+            <option>215</option>
+            <option>219</option>
+            <option>220</option>
+        </property_options>
+        
+        <property_options name="SEMESTER_OPTIONS">
+            <option>Winter</option>
+            <option>Spring</option>
+            <option>Summer</option>
+            <option>Fall</option>
+        </property_options>
+        
+        <property_options name="YEAR_OPTIONS">
+            <option>2018</option>
+            <option>2019</option>
+        </property_options>
+        
     </property_options_list>
+    
 </properties>

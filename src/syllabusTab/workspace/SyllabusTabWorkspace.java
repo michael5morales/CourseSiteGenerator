@@ -7,6 +7,7 @@ package syllabusTab.workspace;
 
 import coursesite.CourseSiteApp;
 import static coursesite.workspace.style.CSStyle.*;
+import static coursesitetab.CourseSiteTabPropertyType.CS_TAB_PLUS_BUTTON;
 import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import static syllabusTab.SyllabusTabPropertyType.*;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import properties_manager.PropertiesManager;
+import static scheduletab.ScheduleTabPropertyType.*;
 import syllabusTab.workspace.controllers.SyllabusTabController;
 
 /**
@@ -205,8 +207,8 @@ public class SyllabusTabWorkspace {
         specialLabelBox.setAlignment(Pos.CENTER_LEFT);
         
         //SYLLABUS TAB STYLING
-        syllabusPane.paddingProperty().setValue(new Insets(3.0, 0.0, 0.0, 1.0));
-        syllabusPane.setSpacing(3.0);
+        syllabusPane.paddingProperty().setValue(new Insets(5.0, 5.0, 5.0, 5.0));
+        syllabusPane.setSpacing(5.0);
         
         scrollPane.setContent(syllabusPane);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -249,7 +251,38 @@ public class SyllabusTabWorkspace {
         ((Button) gui.getGUINode(SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON)).setOnAction(e -> {
             controller.processEditTextAreaVisibility(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA, SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON);
         });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_DESCRIPTION_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_TOPICS_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_PREREQUISITES_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_OUTCOMES_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_TEXTBOOKS_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_GRADED_COMPONENTS_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_GRADED_NOTE_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_ACADEMIC_DISHONESTY_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((TextArea) gui.getGUINode(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
     }
+    
+    
+    
     
     private void initFoolproofDesign() {
         

@@ -46,6 +46,9 @@ public class AppGUIModule {
 
     // THIS IS THE STAGE'S SCENE GRAPH
     protected Scene primaryScene;
+    
+    // CUSTOM DIALOGS
+    protected HashMap<Object, Stage> dialogs;
 
     // THIS PANE ORGANIZES THE BIG PICTURE CONTAINERS FOR THE
     // APPLICATION AppGUIModule. NOTE THAT THE WORKSPACE WILL GO
@@ -105,6 +108,9 @@ public class AppGUIModule {
 
         // THIS WILL STORE ALL OF OUR APP NODES
         guiNodes = new HashMap();
+        
+        // THIS WILL STORE ALL OF OUR APP DIALOGS
+        dialogs = new HashMap();
 
         // THIS WILL BUILD ALL THE NODES
         nodesBuilder = new AppNodesBuilder(this, app.getLanguageModule());
@@ -166,6 +172,20 @@ public class AppGUIModule {
      */
     public Node getGUINode(Object nodeId) {
         return guiNodes.get(nodeId.toString());
+    }
+
+    /**
+     * Accessor method for getting all the dialogs currently in the UI.
+     */
+    public void addDialog(Object dialogId, Stage dialogToAdd) {
+        dialogs.put(dialogId.toString(), dialogToAdd);
+    }
+
+    /**
+     * Accessor method for getting a dialog in the UI.
+     */
+    public Stage getDialog(Object dialogId) {
+        return dialogs.get(dialogId.toString());
     }
 
     /**
@@ -427,7 +447,6 @@ public class AppGUIModule {
      * This function sets up the stylesheet to be used for specifying all style
      * for this application. Note that it does not attach CSS style classes to
      * controls, that must be done separately.
-     * @param stage
      */
     public void initStylesheet(Stage stage) {
         // SELECT THE STYLESHEET

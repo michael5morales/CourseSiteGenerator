@@ -71,16 +71,12 @@ public class ScheduleTabWorkspace {
         
         HBox startBox = csBuilder.buildHBox(this, calendarBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildLabel(SCHEDULE_TAB_STARTING_LABEL, startBox, EMPTY_TEXT, ENABLED);
-        DatePicker startDatePicker = new DatePicker();
-        startDatePicker.setValue(LocalDate.now());
-        startBox.getChildren().add(startDatePicker);
+        csBuilder.buildDatePicker(SCHEDULE_TAB_START_DATE_DATE_PICKER, startBox, EMPTY_TEXT, ENABLED);
         
         HBox endBox = csBuilder.buildHBox(this, calendarBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildLabel(SCHEDULE_TAB_ENDING_LABEL, endBox, EMPTY_TEXT, ENABLED);
-        DatePicker endDatePicker = new DatePicker();
-        endDatePicker.setValue(LocalDate.now());
-        endBox.getChildren().add(endDatePicker);
-        
+        csBuilder.buildDatePicker(SCHEDULE_TAB_END_DATE_DATE_PICKER, endBox, EMPTY_TEXT, ENABLED);
+
         //CALENDAR BOUNDARIES BOX STYLING
         calendarBox.setSpacing(20.0);
         boundaryBox.paddingProperty().setValue(new Insets(3.0, 3.0, 3.0, 3.0));
@@ -97,7 +93,7 @@ public class ScheduleTabWorkspace {
         csBuilder.buildTextButton(SCHEDULE_TAB_MINUS_BUTTON, labelBox, CLASS_CS_BUTTON, ENABLED);
         csBuilder.buildLabel(SCHEDULE_TAB_SCHEDULE_LABEL, labelBox, CLASS_CS_PROMPT, ENABLED);
         
-        TableView<ScheduleItem> itemsTable = csBuilder.buildTableView(this, itemsBox, EMPTY_TEXT, ENABLED);
+        TableView<ScheduleItem> itemsTable = csBuilder.buildTableView(SCHEDULE_TAB_ITEMS_TABLE_VIEW, itemsBox, EMPTY_TEXT, ENABLED);
         TableColumn typeColumn = csBuilder.buildTableColumn(SCHEDULE_TAB_TYPE_COLUMN, itemsTable, EMPTY_TEXT);
         TableColumn dateColumn = csBuilder.buildTableColumn(SCHEDULE_TAB_DATE_COLUMN, itemsTable, EMPTY_TEXT);
         TableColumn titleColumn = csBuilder.buildTableColumn(SCHEDULE_TAB_TITLE_COLUMN, itemsTable, EMPTY_TEXT);
@@ -128,9 +124,7 @@ public class ScheduleTabWorkspace {
         
         csBuilder.buildComboBox(this, addBox, 1, 1, 1, 1, EMPTY_TEXT, ENABLED, SCHEDULE_NULL, SCHEDULE_NULL);
         
-        DatePicker editDatePicker = new DatePicker();
-        editDatePicker.setValue(LocalDate.now());
-        addBox.add(editDatePicker, 1, 2);
+        csBuilder.buildDatePicker(SCHEDULE_TAB_ADD_DATE_DATE_PICKER, addBox, 1, 2, 1, 1, EMPTY_TEXT, ENABLED);
         
         csBuilder.buildTextField(SCHEDULE_TAB_TITLE_TEXT_AREA, addBox, 1, 3, 1, 1, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextField(SCHEDULE_TAB_TOPIC_TEXT_AREA, addBox, 1, 4, 1, 1, EMPTY_TEXT, ENABLED);
@@ -147,8 +141,8 @@ public class ScheduleTabWorkspace {
         addBox.setVgap(5.0);
         
         //SCHEDULE TAB STYLING
-        schedulePane.paddingProperty().setValue(new Insets(3.0, 3.0, 3.0, 3.0));
-        schedulePane.setSpacing(3.0);
+        schedulePane.paddingProperty().setValue(new Insets(5.0, 5.0, 5.0, 5.0));
+        schedulePane.setSpacing(5.0);
         
         scrollPane.setContent(schedulePane);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

@@ -8,6 +8,7 @@ package meetingtimestab.data;
 import coursesite.CourseSiteApp;
 import djf.components.AppDataComponent;
 import djf.modules.AppGUIModule;
+import java.util.Iterator;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import static meetingtimestab.MeetingTimesTabPropertyType.*;
@@ -21,6 +22,7 @@ public class MeetingTimesTabData implements AppDataComponent{
     
     ObservableList<RecitationLabMeetingType> recitations;
     ObservableList<RecitationLabMeetingType> labs;
+    ObservableList<LectureMeetingType> lectures;
     
     public MeetingTimesTabData(CourseSiteApp initApp) {
         app = initApp;
@@ -31,11 +33,105 @@ public class MeetingTimesTabData implements AppDataComponent{
         
         TableView<RecitationLabMeetingType> labsTableView = (TableView)gui.getGUINode(MEETING_TIMES_TAB_LABS_TABLE_VIEW);
         labs = labsTableView.getItems();
+        
+        TableView<LectureMeetingType> lecturesTableView = (TableView)gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
+        lectures = lecturesTableView.getItems();
+    }
+    
+    public void addLecture(LectureMeetingType lecture) {
+        lectures.add(lecture);
+    }
+    
+    public void addRecitation(RecitationLabMeetingType recitation) {
+        recitations.add(recitation);
+    }
+    
+    public void addLab(RecitationLabMeetingType lab) {
+        labs.add(lab);
     }
     
     @Override
     public void reset() {
         recitations.clear();
         labs.clear();
+        lectures.clear();
+    }
+    
+    public Iterator<RecitationLabMeetingType> LabMeetingIterator() {
+        return new LabIterator();
+    }
+    
+    public Iterator<RecitationLabMeetingType> RecitationMeetingIterator() {
+        return new RecitationIterator();
+    }
+    
+    public Iterator<LectureMeetingType> LectureMeetingIterator() {
+        return new LectureIterator();
+    }
+    
+    private class LectureIterator implements Iterator {
+        Iterator lectureIt = lectures.iterator();
+
+        public LectureIterator() {}
+        
+        @Override
+        public boolean hasNext() {
+            if (lectureIt.hasNext())
+                return true;
+            else
+                return false;                
+        }
+
+        @Override
+        public Object next() {
+            if (lectureIt.hasNext())
+                return lectureIt.next();
+            else
+                return null;
+        }
+    }
+    
+    private class RecitationIterator implements Iterator {
+        Iterator recitationIt = recitations.iterator();
+
+        public RecitationIterator() {}
+        
+        @Override
+        public boolean hasNext() {
+            if (recitationIt.hasNext())
+                return true;
+            else
+                return false;                
+        }
+
+        @Override
+        public Object next() {
+            if (recitationIt.hasNext())
+                return recitationIt.next();
+            else
+                return null;
+        }
+    }
+    
+   private class LabIterator implements Iterator {
+        Iterator labIt = labs.iterator();
+
+        public LabIterator() {}
+        
+        @Override
+        public boolean hasNext() {
+            if (labIt.hasNext())
+                return true;
+            else
+                return false;                
+        }
+
+        @Override
+        public Object next() {
+            if (labIt.hasNext())
+                return labIt.next();
+            else
+                return null;
+        }
     }
 }

@@ -8,15 +8,19 @@ package coursesitetab.workspace;
 import coursesite.CourseSiteApp;
 import static coursesite.workspace.style.CSStyle.*;
 import static coursesitetab.CourseSiteTabPropertyType.*;
+import coursesitetab.workspace.controller.CourseSiteTabController;
+import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
 import java.io.File;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -77,18 +81,17 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildLabel(this, bannerBox, 1, 4, 1, 1, CLASS_CS_PROMPT, ENABLED);
         
         //BUILD OTHER BANNER OBJECTS
-        csBuilder.buildComboBox(this, bannerBox, 1, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, SUBJECT_OPTIONS, CS_TAB_DEFAULT_SUBJECT);
-        csBuilder.buildComboBox(this, bannerBox, 1, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, NUMBER_OPTIONS, CS_TAB_DEFAULT_NUMBER);
-        csBuilder.buildComboBox(this, bannerBox, 3, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, SEMESTER_OPTIONS, CS_TAB_DEFAULT_SEMESTER);
-        csBuilder.buildComboBox(this, bannerBox, 3, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, YEAR_OPTIONS, CS_TAB_DEFAULT_YEAR);
+        csBuilder.buildComboBox(CS_TAB_SUBJECT_COMBO_BOX, bannerBox, 1, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, SUBJECT_OPTIONS, CS_TAB_DEFAULT_SUBJECT);
+        csBuilder.buildComboBox(CS_TAB_NUMBER_COMBO_BOX, bannerBox, 1, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, NUMBER_OPTIONS, CS_TAB_DEFAULT_NUMBER);
+        csBuilder.buildComboBox(CS_TAB_SEMESTER_COMBO_BOX, bannerBox, 3, 1, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, SEMESTER_OPTIONS, CS_TAB_DEFAULT_SEMESTER);
+        csBuilder.buildComboBox(CS_TAB_YEAR_COMBO_BOX, bannerBox, 3, 2, 1, 1, CLASS_CS_TEXT_FIELD, ENABLED, YEAR_OPTIONS, CS_TAB_DEFAULT_YEAR);
         
-        csBuilder.buildTextField(this, bannerBox, 1, 3, 3, 1, CLASS_CS_TEXT_FIELD, ENABLED);
+        csBuilder.buildTextField(CS_TAB_TITLE_TEXT_FIELD, bannerBox, 1, 3, 3, 1, CLASS_CS_TEXT_FIELD, ENABLED);
         
         //BANNER BOX STYLING
         bannerBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
         bannerBox.setHgap(10); 
         bannerBox.setVgap(10);
-        
         
         //BUILD PAGES BOX
         HBox pagesBox = csBuilder.buildHBox(this, sitePane, CLASS_CS_BOX, ENABLED);
@@ -109,7 +112,7 @@ public class CourseSiteTabWorkspace {
         
         
         //BUILD STYLE BOX
-        GridPane styleBox = csBuilder.buildGridPane(this, sitePane, CLASS_CS_BOX, ENABLED);
+        GridPane styleBox = csBuilder.buildGridPane(CS_TAB_STYLE_BOX, sitePane, CLASS_CS_BOX, ENABLED);
         
         //BUILD LABELS
         csBuilder.buildLabel(CS_TAB_STYLE_LABEL, styleBox, 0, 0, 1, 1, CLASS_CS_HEADER_LABEL, ENABLED);
@@ -178,7 +181,7 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildLabel(CS_TAB_OFFICE_HOURS_LABEL, ohBox, CLASS_CS_PROMPT, ENABLED);
         
         //BUILD TEXTAREA
-        csBuilder.buildTextArea(this, instructorBox, 0, 5, 4, 4, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextArea(CS_TAB_OH_TEXT_AREA, instructorBox, 0, 5, 4, 4, EMPTY_TEXT, !ENABLED);
         
         //INSTRUCTOR BOX STYLING
         instructorBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -188,8 +191,8 @@ public class CourseSiteTabWorkspace {
         ohBox.setSpacing(5.0);
         
         //SITE TAB STYLING
-        sitePane.paddingProperty().setValue(new Insets(3.0, 0.0, 0.0, 1.0));
-        sitePane.setSpacing(3.0);
+        sitePane.paddingProperty().setValue(new Insets(5.0, 5.0, 5.0, 5.0));
+        sitePane.setSpacing(5.0);
         
         scrollPane.setContent(sitePane);
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -202,7 +205,53 @@ public class CourseSiteTabWorkspace {
     }
     
     private void initControllers() {
+        AppGUIModule gui = app.getGUIModule();
+        CourseSiteTabController controller = new CourseSiteTabController((CourseSiteApp) app);
+
+        // FOOLPROOF DESIGN STUFF
+        TextField homePageTextField = ((TextField) gui.getGUINode(CS_TAB_HOME_PAGE_TEXT_FIELD));
+        TextField emailTextField = ((TextField) gui.getGUINode(CS_TAB_EMAIL_TEXT_FIELD));
+        TextField nameTextField = ((TextField) gui.getGUINode(CS_TAB_NAME_TEXT_FIELD));
+        TextField roomTextField = ((TextField) gui.getGUINode(CS_TAB_ROOM_TEXT_FIELD));
+
+        homePageTextField.textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
         
+        emailTextField.textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        nameTextField.textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        roomTextField.textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        ((ComboBox) gui.getGUINode(CS_TAB_SUBJECT_COMBO_BOX)).setOnAction(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        ((ComboBox) gui.getGUINode(CS_TAB_NUMBER_COMBO_BOX)).setOnAction(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        ((ComboBox) gui.getGUINode(CS_TAB_SEMESTER_COMBO_BOX)).setOnAction(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        ((ComboBox) gui.getGUINode(CS_TAB_YEAR_COMBO_BOX)).setOnAction(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        
+        ((TextField) gui.getGUINode(CS_TAB_TITLE_TEXT_FIELD)).textProperty().addListener(e -> {
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((Button) gui.getGUINode(CS_TAB_PLUS_BUTTON)).setOnAction(e -> {
+            controller.processEditTextAreaVisibility(CS_TAB_OH_TEXT_AREA, CS_TAB_PLUS_BUTTON);
+        });
     }
     
     private void initFoolproofDesign() {

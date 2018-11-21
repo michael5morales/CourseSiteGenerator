@@ -6,9 +6,12 @@
 package coursesite.data;
 
 import coursesite.CourseSiteApp;
+import coursesitetab.data.CourseSiteTabData;
 import djf.components.AppDataComponent;
 import djf.modules.AppGUIModule;
+import meetingtimestab.data.MeetingTimesTabData;
 import officehourstab.data.OfficeHoursData;
+import scheduletab.data.ScheduleTabData;
 import syllabusTab.data.SyllabusTabData;
 
 /**
@@ -19,6 +22,9 @@ public class CourseSiteData implements AppDataComponent{
     CourseSiteApp app;
     AppDataComponent officeHoursData;
     AppDataComponent syllabusTabData;
+    AppDataComponent siteTabData;
+    AppDataComponent meetingTabData;
+    AppDataComponent scheduleTabData;
     
      public CourseSiteData(CourseSiteApp initApp) {
         // KEEP THIS FOR LATER
@@ -26,6 +32,9 @@ public class CourseSiteData implements AppDataComponent{
         AppGUIModule gui = app.getGUIModule();
         officeHoursData = new OfficeHoursData(initApp);
         syllabusTabData = new SyllabusTabData(initApp);
+        siteTabData = new CourseSiteTabData(initApp);
+        meetingTabData = new MeetingTimesTabData(initApp);
+        scheduleTabData = new ScheduleTabData(initApp);
      }
      
      /**
@@ -35,6 +44,10 @@ public class CourseSiteData implements AppDataComponent{
      @Override
     public void reset() {
         officeHoursData.reset();
+        syllabusTabData.reset();
+        siteTabData.reset();
+        meetingTabData.reset();
+        scheduleTabData.reset();
     }
     
     public AppDataComponent getOfficeHoursData() {
@@ -44,4 +57,17 @@ public class CourseSiteData implements AppDataComponent{
     public AppDataComponent getSyllabusTabData() {
         return syllabusTabData;
     }
+    
+    public AppDataComponent getSiteTabData() {
+        return siteTabData;
+    }
+    
+    public AppDataComponent getMeetingTimeData() {
+        return meetingTabData;
+    }
+    
+    public AppDataComponent getScheduleTabData() {
+        return scheduleTabData;
+    }
+    
 }

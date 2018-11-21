@@ -14,17 +14,17 @@ import javafx.beans.property.StringProperty;
  */
 public class RecitationLabMeetingType {
     private final StringProperty section;
-    private final StringProperty daysAndTime;
+    private final StringProperty dayTime;
     private final StringProperty room;
-    private final StringProperty ta1;
-    private final StringProperty ta2;
+    private final StringProperty firstTA;
+    private final StringProperty secondTA;
     
     public RecitationLabMeetingType(String initSection, String initDayTime, String initRoom, String initTA1, String initTA2) {
         section = new SimpleStringProperty(initSection);
-        daysAndTime = new SimpleStringProperty(initDayTime);
+        dayTime = new SimpleStringProperty(initDayTime);
         room = new SimpleStringProperty(initRoom);
-        ta1 = new SimpleStringProperty(initTA1);
-        ta2 = new SimpleStringProperty(initTA2);
+        firstTA = new SimpleStringProperty(initTA1);
+        secondTA = new SimpleStringProperty(initTA2);
     }
     
     public String getSection() {
@@ -36,11 +36,11 @@ public class RecitationLabMeetingType {
     }
     
     public String getDayTime() {
-        return daysAndTime.get();
+        return dayTime.get();
     }
     
     public void setDayTime(String initDayTime) {
-        daysAndTime.set(initDayTime);
+        dayTime.set(initDayTime);
     }
     
     public String getRoom() {
@@ -51,19 +51,19 @@ public class RecitationLabMeetingType {
         room.set(initRoom);
     }
     
-    public String getTA1() {
-        return ta1.get();
+    public String getFirstTA() {
+        return firstTA.get();
     }
     
-    public void setTA1(String initTA) {
-        ta1.set(initTA);
+    public void setFirstTA(String initTA) {
+        firstTA.set(initTA);
     }
     
-     public String getTA2() {
-        return ta2.get();
+     public String getSecondTA() {
+        return secondTA.get();
     }
     
-    public void setTA2(String initTA) {
-        ta2.set(initTA);
+    public void setSecondTA(String initTA) {
+        secondTA.set(initTA);
     }
 }
