@@ -50,6 +50,33 @@ public class MeetingTimesTabData implements AppDataComponent{
         labs.add(lab);
     }
     
+    public void removeLecture(LectureMeetingType lecture) { 
+        for (int i = 0; i < lectures.size(); i++) {
+            if (lectures.get(i) == lecture) {
+                lectures.remove(i);
+                break;
+            }
+        }    
+    }
+        
+    public void removeRecitation(RecitationLabMeetingType recitation) { 
+        for (int i = 0; i < recitations.size(); i++) {
+            if (recitations.get(i) == recitation) {
+                recitations.remove(i);
+                break;
+            }
+        }    
+    }
+    
+    public void removeLab(RecitationLabMeetingType lab) { 
+        for (int i = 0; i < labs.size(); i++) {
+            if (labs.get(i) == lab) {
+                labs.remove(i);
+                break;
+            }
+        }    
+    }
+    
     @Override
     public void reset() {
         recitations.clear();

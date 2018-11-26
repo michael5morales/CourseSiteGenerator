@@ -197,7 +197,7 @@ public class SyllabusTabWorkspace {
         HBox specialLabelBox = csBuilder.buildHBox(this, specialBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON, specialLabelBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildLabel(SYLLABUS_TAB_SPECIAL_ASSISTANCE_LABEL, specialLabelBox, CLASS_CS_PROMPT, ENABLED);
-
+    
         //BUILD TEXTAREA
         csBuilder.buildTextArea(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA, specialBox, EMPTY_TEXT, !ENABLED);
         

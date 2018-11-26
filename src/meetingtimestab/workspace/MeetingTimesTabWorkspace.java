@@ -25,6 +25,7 @@ import static meetingtimestab.MeetingTimesTabPropertyType.*;
 import meetingtimestab.data.LectureMeetingType;
 import meetingtimestab.data.MeetingTimesTabData;
 import meetingtimestab.data.RecitationLabMeetingType;
+import meetingtimestab.workspace.controllers.MeetingTimesTabController;
 import properties_manager.PropertiesManager;
 
 /**
@@ -109,8 +110,8 @@ public class MeetingTimesTabWorkspace {
         recitationSectionColumn.setCellValueFactory(new PropertyValueFactory<String, String>("section"));
         recitationDayTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("dayTime"));
         recitationRoomColumn.setCellValueFactory(new PropertyValueFactory<String, String>("room"));
-        recitationTA1Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta_1"));
-        recitationTA2Column.setCellValueFactory(new PropertyValueFactory<String, String>("ta_2"));
+        recitationTA1Column.setCellValueFactory(new PropertyValueFactory<String, String>("firstTA"));
+        recitationTA2Column.setCellValueFactory(new PropertyValueFactory<String, String>("secondTA"));
         for (int i = 0; i < recitationsTable.getColumns().size(); i++) {
             ((TableColumn)recitationsTable.getColumns().get(i)).prefWidthProperty().bind(recitationsTable.widthProperty().multiply(1.0/5.0));
         }
@@ -166,7 +167,20 @@ public class MeetingTimesTabWorkspace {
     }
     
     public void initControllers() {
+        MeetingTimesTabController controller = new MeetingTimesTabController((CourseSiteApp) app);
         AppGUIModule gui = app.getGUIModule();
+        
+        ((Button) gui.getGUINode(MEETING_TIMES_TAB_PLUS_BUTTON1)).setOnAction(e -> {
+            controller.processAddLecture();
+        });
+        
+        ((Button) gui.getGUINode(MEETING_TIMES_TAB_PLUS_BUTTON2)).setOnAction(e -> {
+            controller.processAddRecitation();
+        });
+        
+        ((Button) gui.getGUINode(MEETING_TIMES_TAB_PLUS_BUTTON3)).setOnAction(e -> {
+            controller.processAddLab();
+        });
         
     }
     
