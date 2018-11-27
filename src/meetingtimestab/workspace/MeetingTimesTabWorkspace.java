@@ -17,8 +17,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import static meetingtimestab.MeetingTimesTabPropertyType.*;
@@ -181,7 +184,28 @@ public class MeetingTimesTabWorkspace {
         ((Button) gui.getGUINode(MEETING_TIMES_TAB_PLUS_BUTTON3)).setOnAction(e -> {
             controller.processAddLab();
         });
+
+        ((Button) gui.getGUINode(MEETING_TIMES_TAB_MINUS_BUTTON1)).setOnAction(e -> {
+            controller.processRemoveLecture();
+        });  
         
+        ((Button) gui.getGUINode(MEETING_TIMES_TAB_MINUS_BUTTON2)).setOnAction(e -> {
+            controller.processRemoveRecitation();
+        });  
+        
+        ((Button) gui.getGUINode(MEETING_TIMES_TAB_MINUS_BUTTON3)).setOnAction(e -> {
+            controller.processRemoveLab();
+        });  
+                
+        
+        TableView lecturesTableView = (TableView) gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
+        //TablePosition tp;
+        
+        lecturesTableView.setOnMouseClicked(e -> {
+            app.getFoolproofModule().updateAll();
+            
+            controller.processSelectLecture();
+        });
     }
     
     public void initFoolproofDesign() {

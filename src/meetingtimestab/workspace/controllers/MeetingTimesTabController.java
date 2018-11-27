@@ -7,12 +7,18 @@ package meetingtimestab.workspace.controllers;
 
 import coursesite.CourseSiteApp;
 import coursesite.data.CourseSiteData;
+import djf.modules.AppGUIModule;
+import javafx.scene.control.TableView;
+import static meetingtimestab.MeetingTimesTabPropertyType.*;
 import meetingtimestab.data.LectureMeetingType;
 import meetingtimestab.data.MeetingTimesTabData;
 import meetingtimestab.data.RecitationLabMeetingType;
 import meetingtimestab.transactions.AddLab_Transaction;
 import meetingtimestab.transactions.AddLecture_Transaction;
 import meetingtimestab.transactions.AddRecitation_Transaction;
+import meetingtimestab.transactions.RemoveLab_Transaction;
+import meetingtimestab.transactions.RemoveLecture_Transaction;
+import meetingtimestab.transactions.RemoveRecitation_Transaction;
 
 /**
  *
@@ -51,4 +57,45 @@ public class MeetingTimesTabController {
         AddLab_Transaction addLabTransaction = new AddLab_Transaction(data, lab);
         app.processTransaction(addLabTransaction);
     }
+    
+    public void processRemoveLecture() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        MeetingTimesTabData data = (MeetingTimesTabData)siteData.getMeetingTimeData();
+        
+        LectureMeetingType lecture = data.getSelectedLecture();
+        
+        RemoveLecture_Transaction removeLectureTransaction = new RemoveLecture_Transaction(data, lecture);
+        app.processTransaction(removeLectureTransaction);
+    }
+    
+    public void processRemoveLab() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        MeetingTimesTabData data = (MeetingTimesTabData)siteData.getMeetingTimeData();
+        
+        RecitationLabMeetingType lab = data.getSelectedLab();
+        
+        RemoveLab_Transaction removeLabTransaction = new RemoveLab_Transaction(data, lab);
+        app.processTransaction(removeLabTransaction);
+    }
+    
+    public void processRemoveRecitation() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        MeetingTimesTabData data = (MeetingTimesTabData)siteData.getMeetingTimeData();
+        
+        RecitationLabMeetingType recitation = data.getSelectedRecitation();
+        
+        RemoveRecitation_Transaction removeRecitationTransaction = new RemoveRecitation_Transaction(data, recitation);
+        app.processTransaction(removeRecitationTransaction);
+    }
+    
+    public void processEditLecture() {
+        
+    }
+    
+    public void processSelectLecture() {
+        AppGUIModule gui = app.getGUIModule();
+        TableView<LectureMeetingType> lecturesTableView = (TableView) gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
+        lecturesTableView.refresh();
+    }
+    
 }
