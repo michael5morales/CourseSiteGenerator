@@ -8,6 +8,7 @@ package meetingtimestab.workspace;
 import coursesite.CourseSiteApp;
 import coursesite.data.CourseSiteData;
 import static coursesite.workspace.style.CSStyle.*;
+import djf.modules.AppFoolproofModule;
 import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
@@ -29,6 +30,7 @@ import meetingtimestab.data.LectureMeetingType;
 import meetingtimestab.data.MeetingTimesTabData;
 import meetingtimestab.data.RecitationLabMeetingType;
 import meetingtimestab.workspace.controllers.MeetingTimesTabController;
+import meetingtimestab.workspace.foolproof.MeetingTimesTabFoolproofDesign;
 import properties_manager.PropertiesManager;
 
 /**
@@ -74,7 +76,7 @@ public class MeetingTimesTabWorkspace {
         
         HBox lecturesLabelBox = csBuilder.buildHBox(this, lecturesBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_PLUS_BUTTON1, lecturesLabelBox, EMPTY_TEXT, ENABLED);
-        csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON1, lecturesLabelBox, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON1, lecturesLabelBox, EMPTY_TEXT, !ENABLED);
         csBuilder.buildLabel(MEETING_TIMES_TAB_LECTURES_LABEL, lecturesLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         TableView<LectureMeetingType> lecturesTable = csBuilder.buildTableView(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW, lecturesBox, CLASS_MT_TABLE_VIEW, ENABLED);
@@ -101,7 +103,7 @@ public class MeetingTimesTabWorkspace {
         
         HBox recitationsLabelBox = csBuilder.buildHBox(this, recitationsBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_PLUS_BUTTON2, recitationsLabelBox, EMPTY_TEXT, ENABLED);
-        csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON2, recitationsLabelBox, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON2, recitationsLabelBox, EMPTY_TEXT, !ENABLED);
         csBuilder.buildLabel(MEETING_TIMES_TAB_RECITATIONS_LABEL, recitationsLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         TableView<RecitationLabMeetingType> recitationsTable = csBuilder.buildTableView(MEETING_TIMES_TAB_RECITATIONS_TABLE_VIEW, recitationsBox, CLASS_MT_TABLE_VIEW, ENABLED);
@@ -130,7 +132,7 @@ public class MeetingTimesTabWorkspace {
         
         HBox labsLabelBox = csBuilder.buildHBox(this, labsBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_PLUS_BUTTON3, labsLabelBox, EMPTY_TEXT, ENABLED);
-        csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON3, labsLabelBox, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON3, labsLabelBox, EMPTY_TEXT, !ENABLED);
         csBuilder.buildLabel(MEETING_TIMES_TAB_LABS_LABEL, labsLabelBox, CLASS_CS_PROMPT, ENABLED);
 
         TableView<RecitationLabMeetingType> labsTable = csBuilder.buildTableView(MEETING_TIMES_TAB_LABS_TABLE_VIEW, labsBox, CLASS_MT_TABLE_VIEW, ENABLED);
@@ -183,18 +185,20 @@ public class MeetingTimesTabWorkspace {
         
         ((Button) gui.getGUINode(MEETING_TIMES_TAB_PLUS_BUTTON3)).setOnAction(e -> {
             controller.processAddLab();
-        });
+         });
 
         ((Button) gui.getGUINode(MEETING_TIMES_TAB_MINUS_BUTTON1)).setOnAction(e -> {
             controller.processRemoveLecture();
+            app.getFoolproofModule().updateAll();
         });  
         
         ((Button) gui.getGUINode(MEETING_TIMES_TAB_MINUS_BUTTON2)).setOnAction(e -> {
-            controller.processRemoveRecitation();
+            app.getFoolproofModule().updateAll();
         });  
         
         ((Button) gui.getGUINode(MEETING_TIMES_TAB_MINUS_BUTTON3)).setOnAction(e -> {
             controller.processRemoveLab();
+            app.getFoolproofModule().updateAll();
         });  
                 
         
@@ -209,6 +213,9 @@ public class MeetingTimesTabWorkspace {
     }
     
     public void initFoolproofDesign() {
-        
+        AppFoolproofModule foolproofSettings = app.getFoolproofModule();
+        foolproofSettings.registerModeSettings(MEETING_TIMES_TAB_FOOLPROOF_SETTINGS,
+                new MeetingTimesTabFoolproofDesign((CourseSiteApp) app));
     }
+    
 }

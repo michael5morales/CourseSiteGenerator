@@ -95,6 +95,24 @@ public class MeetingTimesTabData implements AppDataComponent{
         return table.getSelectionModel().getSelectedItem();
     }
     
+    public boolean isLectureSelected() {
+        AppGUIModule gui = app.getGUIModule();
+        TableView<LectureMeetingType> table = (TableView)gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
+        return table.getSelectionModel().getSelectedItem() != null;
+    }
+    
+    public boolean isLabSelected() {
+        AppGUIModule gui = app.getGUIModule();
+        TableView<RecitationLabMeetingType> table = (TableView)gui.getGUINode(MEETING_TIMES_TAB_LABS_TABLE_VIEW);
+        return table.getSelectionModel().getSelectedItem() != null;
+    }
+    
+    public boolean isRecitationSelected() {
+        AppGUIModule gui = app.getGUIModule();
+        TableView<RecitationLabMeetingType> table = (TableView)gui.getGUINode(MEETING_TIMES_TAB_RECITATIONS_TABLE_VIEW);
+        return table.getSelectionModel().getSelectedItem() != null;
+    }
+    
     @Override
     public void reset() {
         recitations.clear();
