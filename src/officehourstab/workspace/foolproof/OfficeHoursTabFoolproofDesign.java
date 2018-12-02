@@ -115,12 +115,12 @@ public class OfficeHoursTabFoolproofDesign implements FoolproofDesign {
         // FOOLPROOF DESIGN STUFF FOR REMOVE TA BUTTON
         CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
         OfficeHoursData data = (OfficeHoursData)siteData.getOfficeHoursData();
-        Button addTAButton = (Button) gui.getGUINode(OH_MINUS_BUTTON);
+        Button removeTAButton = (Button) gui.getGUINode(OH_MINUS_BUTTON);
         
         if (data.isTASelected()) {
-            addTAButton.setDisable(false);
+            removeTAButton.setDisable(false);
         } else {
-            addTAButton.setDisable(true);
+            removeTAButton.setDisable(true);
         }
     }
     

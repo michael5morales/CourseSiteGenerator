@@ -91,6 +91,7 @@ public class TADialog extends Stage {
         okButton.setOnAction(e->{
             processCompleteWork();
         });
+        
         // VERIFY ENTERED TEXT
         nameTextField.textProperty().addListener(e->{
             processDataChange();
