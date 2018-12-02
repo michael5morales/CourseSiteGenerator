@@ -77,7 +77,7 @@ public class MeetingTimesTabWorkspace {
         HBox lecturesLabelBox = csBuilder.buildHBox(this, lecturesBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_PLUS_BUTTON1, lecturesLabelBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON1, lecturesLabelBox, EMPTY_TEXT, !ENABLED);
-        csBuilder.buildLabel(MEETING_TIMES_TAB_LECTURES_LABEL, lecturesLabelBox, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildLabel(MEETING_TIMES_TAB_LECTURES_LABEL, lecturesLabelBox, CLASS_CS_HEADER_LABEL, ENABLED);
 
         TableView<LectureMeetingType> lecturesTable = csBuilder.buildTableView(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW, lecturesBox, CLASS_MT_TABLE_VIEW, ENABLED);
         TableColumn lecturesSectionColumn = csBuilder.buildTableColumn(MEETING_TIMES_TAB_LECTURES_SECTION_COLUMN, lecturesTable, CLASS_OH_COLUMN);
@@ -88,6 +88,22 @@ public class MeetingTimesTabWorkspace {
         lecturesDayColumn.setCellValueFactory(new PropertyValueFactory<String, String>("day"));
         lecturesTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("time"));
         lecturesRoomColumn.setCellValueFactory(new PropertyValueFactory<String, String>("room"));
+        
+        /*
+        lecturesSectionColumn.setCellFactory(TextFieldTableCell.<LectureMeetingType> forTableColumn());
+        
+         lecturesSectionColumn.setOnEditCommit((CellEditEvent<Object, String> event) -> {
+            TablePosition<Object, String> pos = event.getTablePosition();
+ 
+            String newSection = event.getNewValue();
+ 
+            int row = pos.getRow();
+            LectureMeetingType lecture = (LectureMeetingType)event.getTableView().getItems().get(row);
+ 
+            lecture.setSection(newSection);
+        });
+        */
+        
         for (int i = 0; i < lecturesTable.getColumns().size(); i++) {
             ((TableColumn)lecturesTable.getColumns().get(i)).prefWidthProperty().bind(lecturesTable.widthProperty().multiply(1.0/4.0));
         }
@@ -104,7 +120,7 @@ public class MeetingTimesTabWorkspace {
         HBox recitationsLabelBox = csBuilder.buildHBox(this, recitationsBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_PLUS_BUTTON2, recitationsLabelBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON2, recitationsLabelBox, EMPTY_TEXT, !ENABLED);
-        csBuilder.buildLabel(MEETING_TIMES_TAB_RECITATIONS_LABEL, recitationsLabelBox, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildLabel(MEETING_TIMES_TAB_RECITATIONS_LABEL, recitationsLabelBox, CLASS_CS_HEADER_LABEL, ENABLED);
 
         TableView<RecitationLabMeetingType> recitationsTable = csBuilder.buildTableView(MEETING_TIMES_TAB_RECITATIONS_TABLE_VIEW, recitationsBox, CLASS_MT_TABLE_VIEW, ENABLED);
         TableColumn recitationSectionColumn = csBuilder.buildTableColumn(MEETING_TIMES_TAB_RECITATIONS_SECTION_COLUMN, recitationsTable, CLASS_OH_COLUMN);
@@ -133,7 +149,7 @@ public class MeetingTimesTabWorkspace {
         HBox labsLabelBox = csBuilder.buildHBox(this, labsBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_PLUS_BUTTON3, labsLabelBox, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(MEETING_TIMES_TAB_MINUS_BUTTON3, labsLabelBox, EMPTY_TEXT, !ENABLED);
-        csBuilder.buildLabel(MEETING_TIMES_TAB_LABS_LABEL, labsLabelBox, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildLabel(MEETING_TIMES_TAB_LABS_LABEL, labsLabelBox, CLASS_CS_HEADER_LABEL, ENABLED);
 
         TableView<RecitationLabMeetingType> labsTable = csBuilder.buildTableView(MEETING_TIMES_TAB_LABS_TABLE_VIEW, labsBox, CLASS_MT_TABLE_VIEW, ENABLED);
         TableColumn labsSectionColumn = csBuilder.buildTableColumn(MEETING_TIMES_TAB_LABS_SECTION_COLUMN, labsTable, CLASS_OH_COLUMN);

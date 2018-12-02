@@ -74,7 +74,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_DESCRIPTION_TEXT_AREA, descriptionBox, EMPTY_TEXT, ENABLED);
         
         //TOPICS BOX STYLING
-        descriptionBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        descriptionBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         descriptionLabelBox.setSpacing(15.0);
         descriptionLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -90,7 +90,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_TOPICS_TEXT_AREA, topicsBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        topicsBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        topicsBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         topicsLabelBox.setSpacing(15.0);
         topicsLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -106,7 +106,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_PREREQUISITES_TEXT_AREA, prereqBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        prereqBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        prereqBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         prereqLabelBox.setSpacing(15.0);
         prereqLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -122,7 +122,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_OUTCOMES_TEXT_AREA, outcomesBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        outcomesBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        outcomesBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         outcomesLabelBox.setSpacing(15.0);
         outcomesLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -138,7 +138,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_TEXTBOOKS_TEXT_AREA, textbooksBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        textbooksBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        textbooksBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         textbooksLabelBox.setSpacing(15.0);
         textbooksLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -154,7 +154,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_GRADED_COMPONENTS_TEXT_AREA, componentsBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        componentsBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        componentsBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         componentsLabelBox.setSpacing(15.0);
         componentsLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -170,7 +170,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_GRADED_NOTE_TEXT_AREA, noteBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        noteBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        noteBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         noteLabelBox.setSpacing(15.0);
         noteLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -186,7 +186,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_ACADEMIC_DISHONESTY_TEXT_AREA, academicBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        academicBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        academicBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         academicLabelBox.setSpacing(15.0);
         academicLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -202,7 +202,7 @@ public class SyllabusTabWorkspace {
         csBuilder.buildTextArea(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA, specialBox, EMPTY_TEXT, !ENABLED);
         
         //TOPICS BOX STYLING
-        specialBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
+        specialBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         specialLabelBox.setSpacing(15.0);
         specialLabelBox.setAlignment(Pos.CENTER_LEFT);
         

@@ -7,11 +7,13 @@ package scheduletab.workspace;
 
 import coursesite.CourseSiteApp;
 import static coursesite.workspace.style.CSStyle.*;
+import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
 import java.time.LocalDate;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -24,6 +26,7 @@ import javafx.scene.layout.VBox;
 import properties_manager.PropertiesManager;
 import static scheduletab.ScheduleTabPropertyType.*;
 import scheduletab.data.ScheduleItem;
+import scheduletab.workspace.controllers.ScheduleTabController;
 
 /**
  *
@@ -122,7 +125,7 @@ public class ScheduleTabWorkspace {
         csBuilder.buildLabel(SCHEDULE_TAB_TOPIC_LABEL, addBox, 0, 4, 1, 1, CLASS_CS_PROMPT, ENABLED);
         csBuilder.buildLabel(SCHEDULE_TAB_LINK_LABEL, addBox, 0, 5, 1, 1, CLASS_CS_PROMPT, ENABLED);
         
-        csBuilder.buildComboBox(this, addBox, 1, 1, 1, 1, EMPTY_TEXT, ENABLED, SCHEDULE_NULL, SCHEDULE_NULL);
+        csBuilder.buildComboBox(SCHEDULE_TAB_TYPE_COMBO_BOX, addBox, 1, 1, 1, 1, EMPTY_TEXT, ENABLED, SCHEDULE_NULL, SCHEDULE_NULL);
         
         csBuilder.buildDatePicker(SCHEDULE_TAB_ADD_DATE_DATE_PICKER, addBox, 1, 2, 1, 1, EMPTY_TEXT, ENABLED);
         
@@ -156,7 +159,35 @@ public class ScheduleTabWorkspace {
     }
     
     public void initControllers() {
+        ScheduleTabController controller = new ScheduleTabController((CourseSiteApp) app);
+        AppGUIModule gui = app.getGUIModule();
         
+        TableView tableView = (TableView) gui.getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
+        
+        ((Button) gui.getGUINode(SCHEDULE_TAB_ADD_BUTTON)).setOnAction(e -> {
+            TableView<ScheduleItem> table = (TableView)gui.getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
+            if (table.getSelectionModel().getSelectedItem() == null ) {
+                controller.processAddItem();
+            }else {
+                controller.processUpdateItem();
+                tableView.refresh();
+            }
+        });
+        
+        ((Button) gui.getGUINode(SCHEDULE_TAB_MINUS_BUTTON)).setOnAction(e -> {
+            controller.processRemoveItem();
+        }); 
+        
+        
+        
+        tableView.setOnMouseClicked(e -> {
+            app.getFoolproofModule().updateAll();
+            controller.processLoadItem();
+        });
+        
+        ((Button) gui.getGUINode(SCHEDULE_TAB_CLEAR_BUTTON)).setOnAction(e -> {
+        controller.processClearSelection();
+        });
     }
     
     public void initFoolproofDesign() {

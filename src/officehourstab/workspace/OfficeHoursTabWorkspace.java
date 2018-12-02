@@ -80,7 +80,7 @@ public class OfficeHoursTabWorkspace {
         HBox taTableBox = csBuilder.buildHBox(this, officeHoursBox, EMPTY_TEXT, ENABLED);
         
         csBuilder.buildTextButton(OH_MINUS_BUTTON, taTableBox, CLASS_CS_PROMPT, !ENABLED);
-        csBuilder.buildLabel(OH_TAS_LABEL, taTableBox, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildLabel(OH_TAS_LABEL, taTableBox, CLASS_CS_HEADER_LABEL, ENABLED);
         
         HBox radioButtonsBox = csBuilder.buildHBox(this, taTableBox, EMPTY_TEXT, ENABLED);
         ToggleGroup tg = new ToggleGroup();
@@ -121,7 +121,7 @@ public class OfficeHoursTabWorkspace {
         //BUILD OFFICE HOURS BOX
         HBox ohBox = csBuilder.buildHBox(this, officeHoursBox, EMPTY_TEXT, ENABLED);
         
-        csBuilder.buildLabel(OH_OFFICE_HOURS_HEADER_LABEL, ohBox, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildLabel(OH_OFFICE_HOURS_HEADER_LABEL, ohBox, CLASS_CS_HEADER_LABEL, ENABLED);
         
         HBox startEndBox = csBuilder.buildHBox(this, ohBox, EMPTY_TEXT, ENABLED);
         
