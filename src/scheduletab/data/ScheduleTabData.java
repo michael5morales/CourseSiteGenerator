@@ -46,6 +46,21 @@ public class ScheduleTabData implements AppDataComponent {
         scheduleItems.add(item);
     }
     
+    public void removeItem(ScheduleItem item) {
+        for (int i = 0; i < scheduleItems.size(); i++) {
+            if (scheduleItems.get(i) == item) {
+                scheduleItems.remove(i);
+                break;
+            } 
+        } 
+    } 
+    
+    public ScheduleItem getSelectedItem() {
+        AppGUIModule gui = app.getGUIModule();
+        TableView<ScheduleItem> scheduleTable = (TableView)gui.getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
+        return scheduleTable.getSelectionModel().getSelectedItem();
+    }
+    
     @Override
     public void reset() {
         scheduleItems.clear();

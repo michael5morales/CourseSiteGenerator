@@ -17,12 +17,14 @@ public class ScheduleItem {
     private final StringProperty date;
     private final StringProperty title;
     private final StringProperty topic;
+    private final StringProperty link;
     
-    public ScheduleItem(String initType, String initDate, String initTitle, String initTopic) {
+    public ScheduleItem(String initType, String initDate, String initTitle, String initTopic, String initLink) {
         type = new SimpleStringProperty(initType);
         date = new SimpleStringProperty(initDate);
         title = new SimpleStringProperty(initTitle);
         topic = new SimpleStringProperty(initTopic);
+        link = new SimpleStringProperty(initLink);
     }
     
     public String getType() {
@@ -45,7 +47,7 @@ public class ScheduleItem {
         return title.get();
     }
     
-    public void setSection(String initTitle) {
+    public void setTitle(String initTitle) {
         title.set(initTitle);
     }
     
@@ -56,4 +58,13 @@ public class ScheduleItem {
     public void setTopic(String initTopic) {
         topic.set(initTopic);
     }
+    
+    public String getLink() {
+        return link.get();
+    }
+    
+    public void setLink(String initLink) {
+        link.set(initLink);
+    }
+    
 }
