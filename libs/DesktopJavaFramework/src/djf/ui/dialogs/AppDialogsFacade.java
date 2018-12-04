@@ -113,6 +113,18 @@ public class AppDialogsFacade {
         return selectedFile;
     }
 
+    public static File showOpenImageDialog(Stage window, AppPropertyType openTitleProp) {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(PATH_WORK));
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+        fc.setTitle(props.getProperty(LOAD_WORK_TITLE));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter(props.getProperty(IMAGE_FILE_EXT_DESC), props.getProperty(IMAGE_FILE_EXT))
+        );
+        File selectedFile = fc.showOpenDialog(window);
+        return selectedFile;
+    }
+    
     public static File showSaveDialog(Stage window, AppPropertyType saveTitleProp) {
         // PROMPT THE USER FOR A FILE NAME
         FileChooser fc = new FileChooser();

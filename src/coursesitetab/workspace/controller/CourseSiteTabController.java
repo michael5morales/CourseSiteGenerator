@@ -7,9 +7,14 @@ package coursesitetab.workspace.controller;
 
 import coursesite.CourseSiteApp;
 import coursesitetab.CourseSiteTabPropertyType;
+import djf.AppPropertyType;
 import djf.modules.AppGUIModule;
+import djf.ui.dialogs.AppDialogsFacade;
+import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -60,5 +65,13 @@ public class CourseSiteTabController {
         Button expandBtn = (Button)gui.getGUINode(btn);
         
         expandBtn.setText("+");
+    }
+    
+    public void processChangeImage(CourseSiteTabPropertyType node) {
+        AppGUIModule gui = app.getGUIModule();
+        ImageView imageView = (ImageView)gui.getGUINode(node); 
+        File selectedFile = AppDialogsFacade.showOpenImageDialog(gui.getWindow(), AppPropertyType.APP_TITLE);
+        String file = "file:" + selectedFile.getPath();
+        imageView.setImage(new Image(file));
     }
 }

@@ -181,6 +181,27 @@ public class AppNodesBuilder {
         return datePicker;
     }
     
+    public ImageView buildImageView(Object nodeId,
+            GridPane parent,
+            String styleClass,
+            boolean enabled, String url) {
+        ImageView imageView = new ImageView();
+        imageView.setImage(new Image(url));
+        initNode(nodeId, imageView, parent, styleClass, enabled);
+        return imageView;
+    }
+    
+    public ImageView buildImageView(Object nodeId,
+            GridPane parent,
+            int col, int row, int colSpan, int rowSpan,
+            String styleClass,
+            boolean enabled, String url) {
+        ImageView imageView = new ImageView();
+        imageView.setImage(new Image(url));
+        initNode(nodeId, imageView, parent, col, row, colSpan, rowSpan, styleClass, enabled);
+        return imageView;
+    }
+    
     public ColorPicker buildColorPicker(Object nodeId,
             Pane parentPane,
             String styleClass,

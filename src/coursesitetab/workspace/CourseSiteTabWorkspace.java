@@ -9,6 +9,8 @@ import coursesite.CourseSiteApp;
 import static coursesite.workspace.style.CSStyle.*;
 import static coursesitetab.CourseSiteTabPropertyType.*;
 import coursesitetab.workspace.controller.CourseSiteTabController;
+import coursesitetab.workspace.foolproof.CourseSiteTabFoolproofDesign;
+import djf.modules.AppFoolproofModule;
 import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
@@ -16,6 +18,7 @@ import java.io.File;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -100,10 +103,12 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildLabel(CS_TAB_PAGES_LABEL, pagesBox, CLASS_CS_HEADER_LABEL, ENABLED);
         
         //BUILD CHECKBOXES
-        csBuilder.buildCheckBox(CS_TAB_HOME_CHECK_BOX, pagesBox, CLASS_CS_CHECKBOX, ENABLED);
+        CheckBox home = csBuilder.buildCheckBox(CS_TAB_HOME_CHECK_BOX, pagesBox, CLASS_CS_CHECKBOX, ENABLED);
         csBuilder.buildCheckBox(CS_TAB_SYLLABUS_CHECK_BOX, pagesBox, CLASS_CS_CHECKBOX, ENABLED);
         csBuilder.buildCheckBox(CS_TAB_SCHEDULE_CHECK_BOX, pagesBox, CLASS_CS_CHECKBOX, ENABLED);
         csBuilder.buildCheckBox(CS_TAB_HWS_CHECK_BOX, pagesBox, CLASS_CS_CHECKBOX, ENABLED);
+        
+        home.selectedProperty().setValue(true);
         
         //PAGES BOX STYLING
         pagesBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -126,32 +131,21 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildTextButton(CS_TAB_RIGHT_FOOTER_BUTTON, styleBox, 0, 4, 1, 1, CLASS_CS_BUTTON, ENABLED);
         
         //BUILD IMAGES
-        ImageView iconImage = new ImageView();
-        String iconUrl = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldIcon.png";
-        iconImage.setImage(new Image(iconUrl));
+        String iconUrl = "file:./images/SBUWhiteShieldIcon.png";
+        csBuilder.buildImageView(CS_TAB_ICON_IMAGE_VIEW, styleBox, 1, 1, 1, 1, null, ENABLED, iconUrl);
         
-        ImageView navbarImage = new ImageView();
-        String navbarURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUDarkRedShieldLogo.png";
-        navbarImage.setImage(new Image(navbarURL));
+        String navbarURL = "file:./images/SBUDarkRedShieldLogo.png";
+        csBuilder.buildImageView(CS_TAB_NAVBAR_IMAGE_VIEW, styleBox, 1, 2, 1, 1, null, ENABLED, navbarURL);
         
-        ImageView leftFooterImage = new ImageView();
-        String leftFooterURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldLogo.png";
-        leftFooterImage.setImage(new Image(leftFooterURL));
+        String leftFooterURL = "file:./images/SBUWhiteShieldLogo.png";
+        csBuilder.buildImageView(CS_TAB_LEFT_FOOTER_IMAGE_VIEW, styleBox, 1, 3, 1, 1, null, ENABLED, leftFooterURL);
         
-        ImageView rightFooterImage = new ImageView();
-        String rightFooterURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUCSLogo.png";
-        rightFooterImage.setImage(new Image(rightFooterURL));
+        String rightFooterURL = "file:./images/SBUCSLogo.png";
+        csBuilder.buildImageView(CS_TAB_RIGHT_FOOTER_IMAGEE_VIEW, styleBox, 1, 4, 1, 1, null, ENABLED, rightFooterURL);
         
-        
-        styleBox.add(iconImage, 1, 1);
-        styleBox.add(navbarImage, 1, 2);
-        styleBox.add(leftFooterImage, 1, 3);
-        styleBox.add(rightFooterImage, 1, 4);
-
         //BUILD COMBOBOXES
         ComboBox style = csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 5, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
         style.getItems().add("sea_wolf.css");
-        
         
         //STYLE BOX STYLING
         styleBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
@@ -252,10 +246,30 @@ public class CourseSiteTabWorkspace {
         ((Button) gui.getGUINode(CS_TAB_PLUS_BUTTON)).setOnAction(e -> {
             controller.processEditTextAreaVisibility(CS_TAB_OH_TEXT_AREA, CS_TAB_PLUS_BUTTON);
         });
+        
+        ((Button) gui.getGUINode(CS_TAB_ICON_BUTTON)).setOnAction(e -> {
+            controller.processChangeImage(CS_TAB_ICON_IMAGE_VIEW);
+        });
+        
+        ((Button) gui.getGUINode(CS_TAB_NAV_IMAGE_BUTTON)).setOnAction(e -> {
+            controller.processChangeImage(CS_TAB_NAVBAR_IMAGE_VIEW);
+        });
+        
+        ((Button) gui.getGUINode(CS_TAB_LEFT_FOOTER_BUTTON)).setOnAction(e -> {
+            controller.processChangeImage(CS_TAB_LEFT_FOOTER_IMAGE_VIEW);
+        });
+        
+        ((Button) gui.getGUINode(CS_TAB_RIGHT_FOOTER_BUTTON)).setOnAction(e -> {
+            controller.processChangeImage(CS_TAB_RIGHT_FOOTER_IMAGEE_VIEW);
+        });
+        
     }
     
     private void initFoolproofDesign() {
-        
+        AppGUIModule gui = app.getGUIModule();
+        AppFoolproofModule foolproofSettings = app.getFoolproofModule();
+        foolproofSettings.registerModeSettings(CS_TAB_FOOLPROOF_DESIGN,
+                new CourseSiteTabFoolproofDesign((CourseSiteApp) app));
     }
 
 }
