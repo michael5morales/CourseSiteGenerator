@@ -33,6 +33,7 @@ import officehourstab.data.OfficeHoursData;
 import officehourstab.data.TeachingAssistantPrototype;
 import officehourstab.data.TimeSlot;
 import officehourstab.workspace.controllers.OfficeHoursTabController;
+import officehourstab.workspace.dialogs.TADialog;
 import officehourstab.workspace.foolproof.OfficeHoursTabFoolproofDesign;
 import properties_manager.PropertiesManager;
 
@@ -55,7 +56,14 @@ public class OfficeHoursTabWorkspace {
         
         //INIT FOOLPROOF DESIGN
         initFoolproofDesign();
+        
+        initDialogs();
     }   
+    
+    private void initDialogs() {
+        TADialog taDialog = new TADialog((CourseSiteApp) app);
+        app.getGUIModule().addDialog(OH_TA_EDIT_DIALOG, taDialog);
+    }
     
     public void initLayout() {
         
