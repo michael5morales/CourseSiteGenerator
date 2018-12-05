@@ -6,7 +6,9 @@
 package scheduletab.workspace;
 
 import coursesite.CourseSiteApp;
+import coursesite.data.CourseSiteData;
 import static coursesite.workspace.style.CSStyle.*;
+import djf.modules.AppFoolproofModule;
 import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
@@ -14,11 +16,13 @@ import java.time.LocalDate;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -26,7 +30,9 @@ import javafx.scene.layout.VBox;
 import properties_manager.PropertiesManager;
 import static scheduletab.ScheduleTabPropertyType.*;
 import scheduletab.data.ScheduleItem;
+import scheduletab.data.ScheduleTabData;
 import scheduletab.workspace.controllers.ScheduleTabController;
+import scheduletab.workspace.foolproof.ScheduleTabFoolproofDesign;
 
 /**
  *
@@ -129,9 +135,9 @@ public class ScheduleTabWorkspace {
         
         csBuilder.buildDatePicker(SCHEDULE_TAB_ADD_DATE_DATE_PICKER, addBox, 1, 2, 1, 1, EMPTY_TEXT, ENABLED);
         
-        csBuilder.buildTextField(SCHEDULE_TAB_TITLE_TEXT_AREA, addBox, 1, 3, 1, 1, EMPTY_TEXT, ENABLED);
-        csBuilder.buildTextField(SCHEDULE_TAB_TOPIC_TEXT_AREA, addBox, 1, 4, 1, 1, EMPTY_TEXT, ENABLED);
-        csBuilder.buildTextField(SCHEDULE_TAB_LINK_TEXT_AREA, addBox, 1, 5, 1, 1, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextField(SCHEDULE_TAB_TITLE_TEXT_FIELD, addBox, 1, 3, 1, 1, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextField(SCHEDULE_TAB_TOPIC_TEXT_FIELD, addBox, 1, 4, 1, 1, EMPTY_TEXT, ENABLED);
+        csBuilder.buildTextField(SCHEDULE_TAB_LINK_TEXT_FIELD, addBox, 1, 5, 1, 1, EMPTY_TEXT, ENABLED);
         
         HBox buttonsBox = csBuilder.buildHBox(this, addBox, 0, 6, 3, 3, EMPTY_TEXT, ENABLED);
         csBuilder.buildTextButton(SCHEDULE_TAB_ADD_BUTTON, buttonsBox, CLASS_CS_BUTTON, ENABLED);
@@ -172,25 +178,56 @@ public class ScheduleTabWorkspace {
                 controller.processUpdateItem();
                 tableView.refresh();
             }
+            app.getFoolproofModule().updateControls(SCHEDULE_TAB_FOOLPROOF_SETTINGS);
         });
         
         ((Button) gui.getGUINode(SCHEDULE_TAB_MINUS_BUTTON)).setOnAction(e -> {
             controller.processRemoveItem();
         }); 
-        
-        
-        
+       
         tableView.setOnMouseClicked(e -> {
-            app.getFoolproofModule().updateAll();
+            app.getFoolproofModule().updateControls(SCHEDULE_TAB_FOOLPROOF_SETTINGS);
             controller.processLoadItem();
         });
         
         ((Button) gui.getGUINode(SCHEDULE_TAB_CLEAR_BUTTON)).setOnAction(e -> {
         controller.processClearSelection();
+        app.getFoolproofModule().updateControls(SCHEDULE_TAB_FOOLPROOF_SETTINGS);
+        });
+        
+        ((TextField) gui.getGUINode(SCHEDULE_TAB_TITLE_TEXT_FIELD)).textProperty().addListener(e -> {
+            Button addButton = (Button)gui.getGUINode(SCHEDULE_TAB_ADD_BUTTON);
+            if (tableView.getSelectionModel().getSelectedItem() == null) 
+            addButton.setText("Add");
+        });
+        ((TextField) gui.getGUINode(SCHEDULE_TAB_TOPIC_TEXT_FIELD)).textProperty().addListener(e -> {
+            Button addButton = (Button)gui.getGUINode(SCHEDULE_TAB_ADD_BUTTON);
+            if (tableView.getSelectionModel().getSelectedItem() == null) 
+            addButton.setText("Add");
+        });
+        ((TextField) gui.getGUINode(SCHEDULE_TAB_LINK_TEXT_FIELD)).textProperty().addListener(e -> {
+            Button addButton = (Button)gui.getGUINode(SCHEDULE_TAB_ADD_BUTTON);
+            if (tableView.getSelectionModel().getSelectedItem() == null) 
+            addButton.setText("Add");
+        });
+        
+        ((ComboBox) gui.getGUINode(SCHEDULE_TAB_TYPE_COMBO_BOX)).setOnAction(e -> {
+            Button addButton = (Button)gui.getGUINode(SCHEDULE_TAB_ADD_BUTTON);
+            if (tableView.getSelectionModel().getSelectedItem() == null) 
+            addButton.setText("Add");
+        });
+        
+        ((DatePicker) gui.getGUINode(SCHEDULE_TAB_ADD_DATE_DATE_PICKER)).setOnAction(e -> {
+            Button addButton = (Button)gui.getGUINode(SCHEDULE_TAB_ADD_BUTTON);
+            if (tableView.getSelectionModel().getSelectedItem() == null) 
+            addButton.setText("Add");
         });
     }
     
     public void initFoolproofDesign() {
-        
+        AppGUIModule gui = app.getGUIModule();
+        AppFoolproofModule foolproofSettings = app.getFoolproofModule();
+        foolproofSettings.registerModeSettings(SCHEDULE_TAB_FOOLPROOF_SETTINGS,
+                new ScheduleTabFoolproofDesign((CourseSiteApp) app));
     }
 }

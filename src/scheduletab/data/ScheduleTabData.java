@@ -55,6 +55,12 @@ public class ScheduleTabData implements AppDataComponent {
         } 
     } 
     
+    public boolean isSelected() {
+        AppGUIModule gui = app.getGUIModule();
+        TableView<ScheduleItem> scheduleTable = (TableView)gui.getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
+        return scheduleTable.getSelectionModel().getSelectedItem() != null;
+    }
+    
     public ScheduleItem getSelectedItem() {
         AppGUIModule gui = app.getGUIModule();
         TableView<ScheduleItem> scheduleTable = (TableView)gui.getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);

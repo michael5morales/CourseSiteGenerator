@@ -40,9 +40,9 @@ public class ScheduleTabController {
         //GET NODES
         ComboBox typeBox = (ComboBox) app.getGUIModule().getGUINode(SCHEDULE_TAB_TYPE_COMBO_BOX);
         DatePicker dateBox = (DatePicker) app.getGUIModule().getGUINode(SCHEDULE_TAB_ADD_DATE_DATE_PICKER);
-        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_AREA);
-        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_AREA);
-        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_AREA);
+        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_FIELD);
+        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_FIELD);
+        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_FIELD);
         
         //CONVERT TO STRINGS
         String type = (String)typeBox.getValue();
@@ -83,9 +83,9 @@ public class ScheduleTabController {
         //GET NODES
         ComboBox typeBox = (ComboBox) app.getGUIModule().getGUINode(SCHEDULE_TAB_TYPE_COMBO_BOX);
         DatePicker dateBox = (DatePicker) app.getGUIModule().getGUINode(SCHEDULE_TAB_ADD_DATE_DATE_PICKER);
-        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_AREA);
-        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_AREA);
-        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_AREA);
+        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_FIELD);
+        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_FIELD);
+        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_FIELD);
         
         //CONVERT TO STRINGS
         String type = (String)typeBox.getValue();
@@ -96,6 +96,17 @@ public class ScheduleTabController {
         
         EditScheduleItem_Transaction editScheduleItemTransaction= new EditScheduleItem_Transaction(item, type, date, title, topic, link);
         app.processTransaction(editScheduleItemTransaction);
+        
+        TableView<ScheduleItem> table = (TableView) app.getGUIModule().getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
+        
+        table.getSelectionModel().clearSelection();
+        typeBox.getSelectionModel().clearSelection();
+        typeBox.setValue(null);
+        dateBox.setValue(LocalDate.now());
+        titleTextField.clear();
+        topicTextField.clear();
+        linkTextField.clear();
+        
     }
     
     public void processLoadItem()  {
@@ -104,9 +115,9 @@ public class ScheduleTabController {
         
         ComboBox typeBox = (ComboBox) app.getGUIModule().getGUINode(SCHEDULE_TAB_TYPE_COMBO_BOX);
         DatePicker dateBox = (DatePicker) app.getGUIModule().getGUINode(SCHEDULE_TAB_ADD_DATE_DATE_PICKER);
-        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_AREA);
-        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_AREA);
-        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_AREA);
+        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_FIELD);
+        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_FIELD);
+        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_FIELD);
         
         ScheduleItem item = data.getSelectedItem();
         
@@ -135,9 +146,9 @@ public class ScheduleTabController {
         
         ComboBox typeBox = (ComboBox) app.getGUIModule().getGUINode(SCHEDULE_TAB_TYPE_COMBO_BOX);
         DatePicker dateBox = (DatePicker) app.getGUIModule().getGUINode(SCHEDULE_TAB_ADD_DATE_DATE_PICKER);
-        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_AREA);
-        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_AREA);
-        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_AREA);
+        TextField titleTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TITLE_TEXT_FIELD);
+        TextField topicTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_TOPIC_TEXT_FIELD);
+        TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_FIELD);
         
         TableView<ScheduleItem> table = (TableView) app.getGUIModule().getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
         
@@ -148,6 +159,18 @@ public class ScheduleTabController {
         titleTextField.clear();
         topicTextField.clear();
         linkTextField.clear();
+    }
+    
+    public void processChangeStartDate() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        ScheduleTabData data = (ScheduleTabData)siteData.getScheduleTabData();
+        
+        DatePicker date = (DatePicker) app.getGUIModule().getGUINode(SCHEDULE_TAB_START_DATE_DATE_PICKER);
+        System.out.print("hey yall");
+    }
+    
+    public void processChangeEndDate() {
+        
     }
     
 }
