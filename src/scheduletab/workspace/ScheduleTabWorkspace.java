@@ -222,6 +222,13 @@ public class ScheduleTabWorkspace {
             if (tableView.getSelectionModel().getSelectedItem() == null) 
             addButton.setText("Add");
         });
+        
+        ((DatePicker) gui.getGUINode(SCHEDULE_TAB_START_DATE_DATE_PICKER)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(SCHEDULE_TAB_FOOLPROOF_SETTINGS);
+        });
+        ((DatePicker) gui.getGUINode(SCHEDULE_TAB_END_DATE_DATE_PICKER)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(SCHEDULE_TAB_FOOLPROOF_SETTINGS);
+        });
     }
     
     public void initFoolproofDesign() {

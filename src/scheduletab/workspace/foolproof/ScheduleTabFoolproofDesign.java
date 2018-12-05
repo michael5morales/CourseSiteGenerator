@@ -10,7 +10,9 @@ import coursesite.data.CourseSiteData;
 import djf.modules.AppGUIModule;
 import djf.ui.foolproof.FoolproofDesign;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import static scheduletab.ScheduleTabPropertyType.*;
+import scheduletab.data.ScheduleItem;
 import scheduletab.data.ScheduleTabData;
 
 /**
@@ -27,6 +29,7 @@ public class ScheduleTabFoolproofDesign implements FoolproofDesign {
     @Override
     public void updateControls() {
         updateAddEditButton();
+        updateTable();
     }
     
     private void updateAddEditButton() {
@@ -42,5 +45,17 @@ public class ScheduleTabFoolproofDesign implements FoolproofDesign {
         } else {
             addEditButton.setText("Add/Update");
         }
+    }
+    
+    private void updateTable() {
+       AppGUIModule gui = app.getGUIModule();
+        
+       CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+       ScheduleTabData data = (ScheduleTabData)siteData.getScheduleTabData();
+
+       
+       if (!data.isEmpty()) {
+            data.updateTable();
+       }
     }
 }
