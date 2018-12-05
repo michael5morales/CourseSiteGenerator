@@ -80,6 +80,7 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildLabel(CS_TAB_BANNER_YEAR_LABEL, bannerBox, 2, 2, 1, 1, CLASS_CS_PROMPT, ENABLED);
         csBuilder.buildLabel(CS_TAB_BANNER_TITLE_LABEL, bannerBox, 0, 3, 1, 1, CLASS_CS_PROMPT, ENABLED);
         csBuilder.buildLabel(CS_TAB_BANNER_EXPORT_LABEL, bannerBox, 0, 4, 1, 1, CLASS_CS_PROMPT, ENABLED);
+        csBuilder.buildLabel(CS_TAB_BANNER_EXPORT_DIR_LABEL, bannerBox, 1, 4, 3, 3, CLASS_CS_PROMPT, ENABLED);
 
         csBuilder.buildLabel(this, bannerBox, 1, 4, 1, 1, CLASS_CS_PROMPT, ENABLED);
         
@@ -146,6 +147,7 @@ public class CourseSiteTabWorkspace {
         //BUILD COMBOBOXES
         ComboBox style = csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 5, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
         style.getItems().add("sea_wolf.css");
+        style.getItems().add("halloween.css");
         
         //STYLE BOX STYLING
         styleBox.paddingProperty().setValue(new Insets(15.0, 0.0, 15.0, 15.0));
