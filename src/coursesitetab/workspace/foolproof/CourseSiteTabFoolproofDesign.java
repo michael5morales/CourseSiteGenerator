@@ -8,7 +8,9 @@ package coursesitetab.workspace.foolproof;
 import coursesite.CourseSiteApp;
 import static coursesitetab.CourseSiteTabPropertyType.*;
 import djf.modules.AppGUIModule;
+import djf.ui.dialogs.AppDialogsFacade;
 import djf.ui.foolproof.FoolproofDesign;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
@@ -26,10 +28,35 @@ public class CourseSiteTabFoolproofDesign implements FoolproofDesign {
     @Override
     public void updateControls() {
         updateExportDir();
+        updatePagesFoolproofDesign();
     }
     
     private void updatePagesFoolproofDesign() {
+        AppGUIModule gui = app.getGUIModule();
         
+        CheckBox homeBox = (CheckBox)gui.getGUINode(CS_TAB_HOME_CHECK_BOX);
+        CheckBox syllabusBox = (CheckBox)gui.getGUINode(CS_TAB_SYLLABUS_CHECK_BOX);
+        CheckBox scheduleBox = (CheckBox)gui.getGUINode(CS_TAB_SCHEDULE_CHECK_BOX);
+        CheckBox hwBox = (CheckBox)gui.getGUINode(CS_TAB_HWS_CHECK_BOX);
+        
+        if (!homeBox.isSelected() && !syllabusBox.isSelected()
+                && !scheduleBox.isSelected() && !hwBox.isSelected()) {
+            
+            AppDialogsFacade.showMessageDialog(gui.getWindow(), CS_TAB_PAGES_ERROR_TITLE, CS_TAB_PAGES_ERROR_MESSAGE);
+            
+            if (homeBox.focusedProperty().get()) {
+                homeBox.selectedProperty().setValue(true);
+            }
+            if (syllabusBox.focusedProperty().get()) {
+                syllabusBox.selectedProperty().setValue(true);
+            }
+            if (scheduleBox.focusedProperty().get()) {
+                scheduleBox.selectedProperty().setValue(true);
+            }
+            if (hwBox.focusedProperty().get()) {
+                hwBox.selectedProperty().setValue(true);
+            }
+        }
     }
     
     private void updateExportDir() {

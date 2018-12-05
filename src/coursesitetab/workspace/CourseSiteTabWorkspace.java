@@ -227,18 +227,22 @@ public class CourseSiteTabWorkspace {
         });
         
         ((ComboBox) gui.getGUINode(CS_TAB_SUBJECT_COMBO_BOX)).setOnAction(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
+            app.getFileModule().markAsEdited(ENABLED);   
         });
         
         ((ComboBox) gui.getGUINode(CS_TAB_NUMBER_COMBO_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
             app.getFileModule().markAsEdited(ENABLED);
         });
         
         ((ComboBox) gui.getGUINode(CS_TAB_SEMESTER_COMBO_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
             app.getFileModule().markAsEdited(ENABLED);
         });
         
         ((ComboBox) gui.getGUINode(CS_TAB_YEAR_COMBO_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
             app.getFileModule().markAsEdited(ENABLED);
         });
         
@@ -263,8 +267,24 @@ public class CourseSiteTabWorkspace {
         
         ((Button) gui.getGUINode(CS_TAB_RIGHT_FOOTER_BUTTON)).setOnAction(e -> {
             controller.processChangeImage(CS_TAB_RIGHT_FOOTER_IMAGEE_VIEW);
+            app.getFileModule().markAsEdited(ENABLED);
         });
-        
+        ((CheckBox) gui.getGUINode(CS_TAB_HOME_CHECK_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((CheckBox) gui.getGUINode(CS_TAB_SYLLABUS_CHECK_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((CheckBox) gui.getGUINode(CS_TAB_SCHEDULE_CHECK_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
+            app.getFileModule().markAsEdited(ENABLED);
+        });
+        ((CheckBox) gui.getGUINode(CS_TAB_HWS_CHECK_BOX)).setOnAction(e -> {
+            app.getFoolproofModule().updateControls(CS_TAB_FOOLPROOF_DESIGN);
+            app.getFileModule().markAsEdited(ENABLED);
+        });
     }
     
     private void initFoolproofDesign() {
