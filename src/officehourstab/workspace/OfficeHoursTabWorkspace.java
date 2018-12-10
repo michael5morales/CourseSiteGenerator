@@ -213,6 +213,7 @@ public class OfficeHoursTabWorkspace {
         OfficeHoursTabController controller = new OfficeHoursTabController((CourseSiteApp) app);
         AppGUIModule gui = app.getGUIModule();
 
+        
         // FOOLPROOF DESIGN STUFF
         TextField nameTextField = ((TextField) gui.getGUINode(OH_NAME_TEXT_FIELD));
         TextField emailTextField = ((TextField) gui.getGUINode(OH_EMAIL_TEXT_FIELD));
