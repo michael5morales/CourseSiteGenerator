@@ -45,7 +45,7 @@ public class LectureMeetingType {
         return time.get();
     }
     
-    public void setDayTime(String initTime) {
+    public void setTime(String initTime) {
         time.set(initTime);
     }
     

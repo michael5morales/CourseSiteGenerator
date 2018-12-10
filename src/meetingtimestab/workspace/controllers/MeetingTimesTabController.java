@@ -8,6 +8,9 @@ package meetingtimestab.workspace.controllers;
 import coursesite.CourseSiteApp;
 import coursesite.data.CourseSiteData;
 import djf.modules.AppGUIModule;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import static meetingtimestab.MeetingTimesTabPropertyType.*;
 import meetingtimestab.data.LectureMeetingType;
@@ -16,6 +19,7 @@ import meetingtimestab.data.RecitationLabMeetingType;
 import meetingtimestab.transactions.AddLab_Transaction;
 import meetingtimestab.transactions.AddLecture_Transaction;
 import meetingtimestab.transactions.AddRecitation_Transaction;
+import meetingtimestab.transactions.EditLecture_Transaction;
 import meetingtimestab.transactions.RemoveLab_Transaction;
 import meetingtimestab.transactions.RemoveLecture_Transaction;
 import meetingtimestab.transactions.RemoveRecitation_Transaction;
@@ -88,14 +92,31 @@ public class MeetingTimesTabController {
         app.processTransaction(removeRecitationTransaction);
     }
     
-    public void processEditLecture() {
+    public void processEditLecture(LectureMeetingType editlecture, int row) {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        MeetingTimesTabData data = (MeetingTimesTabData)siteData.getMeetingTimeData();
         
+        LectureMeetingType initLecture = data.getOldLecture(row);
+
+        EditLecture_Transaction editLectureTransaction = new EditLecture_Transaction(data, initLecture, editlecture.getSection(), editlecture.getDay(), 
+                editlecture.getTime(), editlecture.getRoom(), row);
+        app.processTransaction(editLectureTransaction);
     }
     
-    public void processSelectLecture() {
+    public void processAddOldLecture() {
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        MeetingTimesTabData data = (MeetingTimesTabData)siteData.getMeetingTimeData();
+        
         AppGUIModule gui = app.getGUIModule();
-        TableView<LectureMeetingType> lecturesTableView = (TableView) gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
-        lecturesTableView.refresh();
+
+        TableView<LectureMeetingType> lecturesTableView = (TableView)gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
+        
+        LectureMeetingType oldlecture = lecturesTableView.getSelectionModel().getSelectedItem();
+        
+        LectureMeetingType lecture = new LectureMeetingType(oldlecture.getSection(), oldlecture.getDay(), oldlecture.getTime(), oldlecture.getRoom());
+        
+        data.addOldLecture(lecture, lecturesTableView.getSelectionModel().getSelectedCells().get(0).getRow());
     }
+    
     
 }

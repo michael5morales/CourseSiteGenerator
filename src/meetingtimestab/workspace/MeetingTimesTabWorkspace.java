@@ -6,12 +6,12 @@
 package meetingtimestab.workspace;
 
 import coursesite.CourseSiteApp;
-import coursesite.data.CourseSiteData;
 import static coursesite.workspace.style.CSStyle.*;
 import djf.modules.AppFoolproofModule;
 import djf.modules.AppGUIModule;
 import static djf.modules.AppGUIModule.ENABLED;
 import djf.ui.AppNodesBuilder;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,7 +19,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -27,7 +26,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import static meetingtimestab.MeetingTimesTabPropertyType.*;
 import meetingtimestab.data.LectureMeetingType;
-import meetingtimestab.data.MeetingTimesTabData;
 import meetingtimestab.data.RecitationLabMeetingType;
 import meetingtimestab.workspace.controllers.MeetingTimesTabController;
 import meetingtimestab.workspace.foolproof.MeetingTimesTabFoolproofDesign;
@@ -88,25 +86,17 @@ public class MeetingTimesTabWorkspace {
         lecturesDayColumn.setCellValueFactory(new PropertyValueFactory<String, String>("day"));
         lecturesTimeColumn.setCellValueFactory(new PropertyValueFactory<String, String>("time"));
         lecturesRoomColumn.setCellValueFactory(new PropertyValueFactory<String, String>("room"));
-        
-        /*
-        lecturesSectionColumn.setCellFactory(TextFieldTableCell.<LectureMeetingType> forTableColumn());
-        
-         lecturesSectionColumn.setOnEditCommit((CellEditEvent<Object, String> event) -> {
-            TablePosition<Object, String> pos = event.getTablePosition();
- 
-            String newSection = event.getNewValue();
- 
-            int row = pos.getRow();
-            LectureMeetingType lecture = (LectureMeetingType)event.getTableView().getItems().get(row);
- 
-            lecture.setSection(newSection);
-        });
-        */
-        
         for (int i = 0; i < lecturesTable.getColumns().size(); i++) {
             ((TableColumn)lecturesTable.getColumns().get(i)).prefWidthProperty().bind(lecturesTable.widthProperty().multiply(1.0/4.0));
         }
+        
+        lecturesTable.setEditable(ENABLED);
+
+        lecturesSectionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lecturesDayColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lecturesTimeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lecturesRoomColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
         
         //LECTURES BOX STYLING
         lecturesBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
@@ -137,6 +127,15 @@ public class MeetingTimesTabWorkspace {
             ((TableColumn)recitationsTable.getColumns().get(i)).prefWidthProperty().bind(recitationsTable.widthProperty().multiply(1.0/5.0));
         }
         
+        recitationsTable.setEditable(ENABLED);
+
+        recitationSectionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        recitationDayTimeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        recitationRoomColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        recitationTA1Column.setCellFactory(TextFieldTableCell.forTableColumn());
+        recitationTA2Column.setCellFactory(TextFieldTableCell.forTableColumn());
+        
+        
         //RECITATIONS BOX STYLING
         recitationsBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         recitationsLabelBox.setSpacing(15.0);
@@ -166,6 +165,14 @@ public class MeetingTimesTabWorkspace {
             ((TableColumn)labsTable.getColumns().get(i)).prefWidthProperty().bind(labsTable.widthProperty().multiply(1.0/5.0));
         }
         
+        labsTable.setEditable(ENABLED);
+
+        labsSectionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        labsDayTimeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        labsRoomColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        labsTA1Column.setCellFactory(TextFieldTableCell.forTableColumn());
+        labsTA2Column.setCellFactory(TextFieldTableCell.forTableColumn());
+        
         //LABS BOX STYLING
         labsBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
         labsLabelBox.setSpacing(15.0);
@@ -190,6 +197,8 @@ public class MeetingTimesTabWorkspace {
     public void initControllers() {
         MeetingTimesTabController controller = new MeetingTimesTabController((CourseSiteApp) app);
         AppGUIModule gui = app.getGUIModule();
+        
+        
         
         ((Button) gui.getGUINode(MEETING_TIMES_TAB_PLUS_BUTTON1)).setOnAction(e -> {
             controller.processAddLecture();
@@ -217,15 +226,49 @@ public class MeetingTimesTabWorkspace {
             app.getFoolproofModule().updateAll();
         });  
                 
-        
         TableView lecturesTableView = (TableView) gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
-        //TablePosition tp;
         
         lecturesTableView.setOnMouseClicked(e -> {
             app.getFoolproofModule().updateAll();
-            
-            controller.processSelectLecture();
         });
+        
+        
+        TableColumn sectionColumn = (TableColumn)lecturesTableView.getColumns().get(0);
+        TableColumn daysColumn = (TableColumn)lecturesTableView.getColumns().get(0);
+        TableColumn timeColumn = (TableColumn)lecturesTableView.getColumns().get(0);
+        TableColumn roomColumn = (TableColumn)lecturesTableView.getColumns().get(0);
+        
+        sectionColumn.setOnEditStart(e -> {
+            controller.processAddOldLecture();
+        });
+        
+        sectionColumn.setOnEditCommit(
+            new EventHandler<CellEditEvent<LectureMeetingType, String>>() {
+                @Override
+                public void handle(CellEditEvent<LectureMeetingType, String> t) {
+                    LectureMeetingType newLecture = (LectureMeetingType) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow());
+                    newLecture.setSection(t.getNewValue());
+                    
+                    controller.processEditLecture(newLecture, t.getTablePosition().getRow());       
+                }
+            }
+        );
+        
+        TableView recitationsTableView = (TableView) gui.getGUINode(MEETING_TIMES_TAB_RECITATIONS_TABLE_VIEW);
+        
+        recitationsTableView.setOnMouseClicked(e -> {
+            app.getFoolproofModule().updateAll();
+        });
+        
+        TableView labsTableView = (TableView) gui.getGUINode(MEETING_TIMES_TAB_LABS_TABLE_VIEW);
+        
+        labsTableView.setOnMouseClicked(e -> {
+            app.getFoolproofModule().updateAll();
+        });
+        
+        
+        
     }
     
     public void initFoolproofDesign() {

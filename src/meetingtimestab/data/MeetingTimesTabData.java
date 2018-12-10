@@ -8,6 +8,7 @@ package meetingtimestab.data;
 import coursesite.CourseSiteApp;
 import djf.components.AppDataComponent;
 import djf.modules.AppGUIModule;
+import java.util.HashMap;
 import java.util.Iterator;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -23,6 +24,8 @@ public class MeetingTimesTabData implements AppDataComponent{
     ObservableList<RecitationLabMeetingType> recitations;
     ObservableList<RecitationLabMeetingType> labs;
     ObservableList<LectureMeetingType> lectures;
+        
+    HashMap<Integer, LectureMeetingType> oldLectures = new HashMap<>();
     
     public MeetingTimesTabData(CourseSiteApp initApp) {
         app = initApp;
@@ -39,15 +42,15 @@ public class MeetingTimesTabData implements AppDataComponent{
     }
     
     public void addLecture(LectureMeetingType lecture) {
-        lectures.add(lecture);
+        this.lectures.add(lecture);
     }
     
     public void addRecitation(RecitationLabMeetingType recitation) {
-        recitations.add(recitation);
+        this.recitations.add(recitation);
     }
     
     public void addLab(RecitationLabMeetingType lab) {
-        labs.add(lab);
+        this.labs.add(lab);
     }
     
     public void removeLecture(LectureMeetingType lecture) { 
@@ -77,6 +80,20 @@ public class MeetingTimesTabData implements AppDataComponent{
         }    
     }
     
+    public void addOldLecture(LectureMeetingType lecture, int row){
+        oldLectures.put(row, lecture);
+    }
+    
+    public LectureMeetingType getOldLecture(int row) {
+        return oldLectures.get(row);
+    }
+    
+    public void replaceLecture(LectureMeetingType newLecture, int row) {
+        oldLectures.replace(row, lectures.get(row));
+        lectures.remove(row);
+        lectures.add(row, newLecture);
+    }
+ 
     public LectureMeetingType getSelectedLecture() {
         AppGUIModule gui = app.getGUIModule();
         TableView<LectureMeetingType> table = (TableView)gui.getGUINode(MEETING_TIMES_TAB_LECTURES_TABLE_VIEW);
