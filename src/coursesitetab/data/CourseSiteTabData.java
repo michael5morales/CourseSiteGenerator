@@ -12,7 +12,10 @@ import djf.modules.AppGUIModule;
 import java.util.ArrayList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
@@ -23,11 +26,6 @@ import javafx.scene.layout.GridPane;
 public class CourseSiteTabData implements AppDataComponent {
     CourseSiteApp app;
     
-    private String iconUrl = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldIcon.png";
-    private String navbarURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUDarkRedShieldLogo.png";
-    private String leftFooterURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUWhiteShieldLogo.png";
-    private String rightFooterURL = "file:/Users/Michael/Documents/SBU/CSE_219/CourseSiteGeneratorApp/CourseSiteGenerator/images/SBUCSLogo.png";
-        
     
     public CourseSiteTabData(CourseSiteApp initApp) {
         app = initApp;
@@ -73,19 +71,26 @@ public class CourseSiteTabData implements AppDataComponent {
         
     }
     
-    public void initInstructor(String name, String room, String email, String homePage) {
+    public void initInstructor(String name, String room, String email, String homePage, String hours) {
         AppGUIModule gui = app.getGUIModule();
         
         TextField nameField = (TextField) gui.getGUINode(CS_TAB_NAME_TEXT_FIELD);
         TextField emailField = (TextField) gui.getGUINode(CS_TAB_EMAIL_TEXT_FIELD);
         TextField roomField = (TextField) gui.getGUINode(CS_TAB_ROOM_TEXT_FIELD);
         TextField homePageField = (TextField) gui.getGUINode(CS_TAB_HOME_PAGE_TEXT_FIELD);
+        TextArea hoursTxtArea = (TextArea) gui.getGUINode(CS_TAB_OH_TEXT_AREA);
         
         nameField.setText(name);
         emailField.setText(email);
         roomField.setText(room);
         homePageField.setText(homePage);
-
+        hoursTxtArea.setText(hours);
+    }
+    
+    public String getExportDir() {
+        AppGUIModule gui = app.getGUIModule();
+        Label label = (Label)gui.getGUINode(CS_TAB_BANNER_EXPORT_DIR_LABEL);
+        return label.getText();
     }
     
     //HELPER METHODS FOR SAVING TO JSON FILES
@@ -142,21 +147,44 @@ public class CourseSiteTabData implements AppDataComponent {
             selected.add(hwsCheckBox.getText());
         return selected;
     }
+    
+    public String getHours() {
+        AppGUIModule gui = app.getGUIModule();
+        TextArea txtArea = (TextArea) gui.getGUINode(CS_TAB_OH_TEXT_AREA);
+        String hours = txtArea.getText();
+        return hours;
+    }
    
     public String getFavIconURL() {
-        return iconUrl;
+        AppGUIModule gui = app.getGUIModule();
+        ImageView favicon = (ImageView) gui.getGUINode(CS_TAB_ICON_IMAGE_VIEW);
+        Image imageUrl = favicon.getImage();
+        String url = imageUrl.impl_getUrl();
+        return url.substring(5);
     }
     
     public String getNavbarURL() {
-        return navbarURL;
+        AppGUIModule gui = app.getGUIModule();
+        ImageView favicon = (ImageView) gui.getGUINode(CS_TAB_NAVBAR_IMAGE_VIEW);
+        Image imageUrl = favicon.getImage();
+        String url = imageUrl.impl_getUrl();
+        return url.substring(5);
     }
     
     public String getLeftFooterURL() {
-        return leftFooterURL;
+        AppGUIModule gui = app.getGUIModule();
+        ImageView favicon = (ImageView) gui.getGUINode(CS_TAB_LEFT_FOOTER_IMAGE_VIEW);
+        Image imageUrl = favicon.getImage();
+        String url = imageUrl.impl_getUrl();
+        return url.substring(5);
     }
     
     public String getRightFooterURL() {
-        return rightFooterURL;
+        AppGUIModule gui = app.getGUIModule();
+        ImageView favicon = (ImageView) gui.getGUINode(CS_TAB_RIGHT_FOOTER_IMAGE_VIEW);
+        Image imageUrl = favicon.getImage();
+        String url = imageUrl.impl_getUrl();
+        return url.substring(5);
     }
     
     public String getInstructorName() {

@@ -75,6 +75,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         descriptionBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        descriptionBox.setSpacing(15.0);
         descriptionLabelBox.setSpacing(15.0);
         descriptionLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -91,6 +92,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         topicsBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        topicsBox.setSpacing(15.0);
         topicsLabelBox.setSpacing(15.0);
         topicsLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -107,6 +109,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         prereqBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        prereqBox.setSpacing(15.0);
         prereqLabelBox.setSpacing(15.0);
         prereqLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -123,6 +126,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         outcomesBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        outcomesBox.setSpacing(15.0);
         outcomesLabelBox.setSpacing(15.0);
         outcomesLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -139,6 +143,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         textbooksBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        textbooksBox.setSpacing(15.0);
         textbooksLabelBox.setSpacing(15.0);
         textbooksLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -155,6 +160,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         componentsBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        componentsBox.setSpacing(15.0);
         componentsLabelBox.setSpacing(15.0);
         componentsLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -171,6 +177,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         noteBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        noteBox.setSpacing(15.0);
         noteLabelBox.setSpacing(15.0);
         noteLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -187,6 +194,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         academicBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        academicBox.setSpacing(15.0);
         academicLabelBox.setSpacing(15.0);
         academicLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -203,6 +211,7 @@ public class SyllabusTabWorkspace {
         
         //TOPICS BOX STYLING
         specialBox.paddingProperty().setValue(new Insets(15.0, 15.0, 15.0, 15.0));
+        specialBox.setSpacing(15.0);
         specialLabelBox.setSpacing(15.0);
         specialLabelBox.setAlignment(Pos.CENTER_LEFT);
         
@@ -251,32 +260,33 @@ public class SyllabusTabWorkspace {
         ((Button) gui.getGUINode(SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON)).setOnAction(e -> {
             controller.processEditTextAreaVisibility(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA, SYLLABUS_TAB_SPECIAL_ASSISTANCE_PLUS_BUTTON);
         });
+        
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_DESCRIPTION_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_TOPICS_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_PREREQUISITES_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_OUTCOMES_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_TEXTBOOKS_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+           
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_GRADED_COMPONENTS_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_GRADED_NOTE_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_ACADEMIC_DISHONESTY_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         ((TextArea) gui.getGUINode(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA)).textProperty().addListener(e -> {
-            app.getFileModule().markAsEdited(ENABLED);
+            
         });
         
     }

@@ -28,6 +28,17 @@ import javax.json.stream.JsonGenerator;
 import coursesite.CourseSiteApp;
 import coursesite.data.CourseSiteData;
 import coursesitetab.data.CourseSiteTabData;
+import static djf.AppPropertyType.APP_EXPORT_PAGE;
+import static djf.AppPropertyType.APP_EXPORT_PATH;
+import java.io.File;
+import java.math.BigDecimal;
+import java.nio.channels.FileChannel;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.ArrayList;
 import javax.json.stream.JsonParser;
 import meetingtimestab.data.LectureMeetingType;
@@ -35,9 +46,11 @@ import meetingtimestab.data.MeetingTimesTabData;
 import meetingtimestab.data.RecitationLabMeetingType;
 import officehourstab.data.OfficeHoursData;
 import officehourstab.data.TAType;
+import static officehourstab.data.TAType.*;
 import officehourstab.data.TeachingAssistantPrototype;
 import officehourstab.data.TimeSlot;
 import officehourstab.data.TimeSlot.DayOfWeek;
+import properties_manager.PropertiesManager;
 import scheduletab.data.ScheduleItem;
 import scheduletab.data.ScheduleTabData;
 import syllabusTab.data.SyllabusTabData;
@@ -58,10 +71,13 @@ public class CourseSiteFiles implements AppFileComponent{
     static final String JSON_YEAR = "year";
     static final String JSON_TITLE = "title";
     static final String JSON_LOGOS = "logos";
+    static final String JSON_HREF = "href";
+    static final String JSON_SRC = "src";
     static final String JSON_FAV_ICON = "favicon";
     static final String JSON_NAVBAR_IMAGE = "navbar";
     static final String JSON_LEFT_FOOTER_IMAGE = "bottom_left";
     static final String JSON_RIGHT_FOOTER_IMAGE = "bottom_right";
+    static final String JSON_HOURS = "hours";
     
     static final String JSON_PAGES = "pages";
     
@@ -121,6 +137,7 @@ public class CourseSiteFiles implements AppFileComponent{
     static final String JSON_DAY = "day";
     static final String JSON_HWS = "hws";
     static final String JSON_HOLIDAYS = "holidays";
+    static final String JSON_LINK = "link";
      
     public CourseSiteFiles(CourseSiteApp initApp) {
         app = initApp;
@@ -161,8 +178,9 @@ public class CourseSiteFiles implements AppFileComponent{
         String room = instructorBoxJson.getString(JSON_INSTRUCTOR_ROOM);
         String email = instructorBoxJson.getString(JSON_INSTRUCTOR_EMAIL);
         String homePage = instructorBoxJson.getString(JSON_INSTRUCTOR_HOME_PAGE);
+        String hours = instructorBoxJson.getString(JSON_HOURS);
         
-        siteTabDataManager.initInstructor(name, room, email, homePage);
+        siteTabDataManager.initInstructor(name, room, email, homePage, hours);
         
         SyllabusTabData syllabusTabDataManager = (SyllabusTabData)siteData.getSyllabusTabData();
 
@@ -275,6 +293,7 @@ public class CourseSiteFiles implements AppFileComponent{
             String taName = jsonOfficeHours.getString(JSON_NAME);
             TeachingAssistantPrototype ta = ohTabDataManager.getTAWithName(taName);
             TimeSlot timeSlot = ohTabDataManager.getTimeSlot(startTime);
+            System.out.println(ta.getName());
             timeSlot.toggleTA(dow, ta);
         }
         
@@ -291,9 +310,9 @@ public class CourseSiteFiles implements AppFileComponent{
             String day = scheduleItemJson.getString(JSON_DAY);
             String date = month + "/" + day + "/2018";
             String itemTitle = scheduleItemJson.getString(JSON_TITLE);
-            String topic = scheduleItemJson.getString(JSON_TOPIC);
+            String link = scheduleItemJson.getString(JSON_LINK);
             
-            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic);
+            ScheduleItem item = new ScheduleItem(type, date, itemTitle, "", link);
             
             scheduleTabDataManager.addItem(item);
         }
@@ -308,8 +327,9 @@ public class CourseSiteFiles implements AppFileComponent{
             String date = month + "/" + day + "/2018";
             String itemTitle = lectureJson.getString(JSON_TITLE);
             String topic = lectureJson.getString(JSON_TOPIC);
+            String link = lectureJson.getString(JSON_LINK);
             
-            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic);
+            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic, link);
             
             scheduleTabDataManager.addItem(item);
         }
@@ -324,8 +344,9 @@ public class CourseSiteFiles implements AppFileComponent{
             String date = month + "/" + day + "/2018";
             String itemTitle = recitationJson.getString(JSON_TITLE);
             String topic = recitationJson.getString(JSON_TOPIC);
+            String link = recitationJson.getString(JSON_LINK);
             
-            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic);
+            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic, link);
             
             scheduleTabDataManager.addItem(item);
         }
@@ -340,8 +361,9 @@ public class CourseSiteFiles implements AppFileComponent{
             String date = month + "/" + day + "/2018";
             String itemTitle = hwJson.getString(JSON_TITLE);
             String topic = hwJson.getString(JSON_TOPIC);
+            String link = hwJson.getString(JSON_LINK);
             
-            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic);
+            ScheduleItem item = new ScheduleItem(type, date, itemTitle, topic, link);
             
             scheduleTabDataManager.addItem(item);
         }
@@ -355,7 +377,12 @@ public class CourseSiteFiles implements AppFileComponent{
             JsonObject jsonTA = jsonTAArray.getJsonObject(i);
             String name = jsonTA.getString(JSON_NAME);
             String email = jsonTA.getString(JSON_EMAIL);
-            TAType type = TAType.valueOf(jsonTA.getString(JSON_TYPE));
+            TAType type;
+            if (tas.equals("grad_tas")) {
+                type = Graduate;
+            } else {
+                type = Undergraduate;
+            }
             TeachingAssistantPrototype ta = new TeachingAssistantPrototype(name, email, type);
             data.addTA(ta);
         }     
@@ -379,26 +406,61 @@ public class CourseSiteFiles implements AppFileComponent{
         //SITE TAB SAVE DATA
         CourseSiteTabData siteTabDataManager = (CourseSiteTabData)siteData.getSiteTabData();
         
+        JsonObject favIcon = Json.createObjectBuilder() 
+                .add(JSON_HREF, siteTabDataManager.getFavIconURL())
+                .build();
+        JsonObject navbar= Json.createObjectBuilder() 
+                .add(JSON_HREF, "http://www.stonybrook.edu")
+                .add(JSON_SRC, siteTabDataManager.getNavbarURL())
+                .build();
+        JsonObject leftFooter= Json.createObjectBuilder()
+                .add(JSON_HREF, "http://www.cs.stonybrook.edu")
+                .add(JSON_SRC, siteTabDataManager.getLeftFooterURL())
+                .build();
+        JsonObject rightFooter= Json.createObjectBuilder() 
+                .add(JSON_HREF, "http://www.cs.stonybrook.edu")
+                .add(JSON_SRC, siteTabDataManager.getRightFooterURL())
+                .build();
+        
         JsonObject siteTabStyleJson = Json.createObjectBuilder()
-            .add(JSON_FAV_ICON, siteTabDataManager.getFavIconURL())
-            .add(JSON_NAVBAR_IMAGE, siteTabDataManager.getNavbarURL())
-            .add(JSON_LEFT_FOOTER_IMAGE, siteTabDataManager.getLeftFooterURL())
-            .add(JSON_RIGHT_FOOTER_IMAGE, siteTabDataManager.getRightFooterURL())
+            .add(JSON_FAV_ICON, favIcon)
+            .add(JSON_NAVBAR_IMAGE, navbar)
+            .add(JSON_LEFT_FOOTER_IMAGE, leftFooter)
+            .add(JSON_RIGHT_FOOTER_IMAGE, rightFooter)
             .build();
         
         JsonObject instructorJson = Json.createObjectBuilder()
             .add(JSON_INSTRUCTOR_NAME, siteTabDataManager.getInstructorName())
             .add(JSON_INSTRUCTOR_HOME_PAGE, siteTabDataManager.getHomepage())
             .add(JSON_INSTRUCTOR_EMAIL, siteTabDataManager.getEmail())
-            .add(JSON_INSTRUCTOR_ROOM, siteTabDataManager.getRoom()) 
+            .add(JSON_INSTRUCTOR_ROOM, siteTabDataManager.getRoom())
+            .add(JSON_HOURS, siteTabDataManager.getHours())
             .build();
         
         JsonArrayBuilder pagesArrayBuilder = Json.createArrayBuilder();
         ArrayList<String> pagesList = siteTabDataManager.getPages();
             
         for (String page : pagesList) {
+            String link = "";
+            
+            switch (page) {
+                case "Home":
+                    link = "index.html";
+                    break;
+                case "Syllabus":
+                    link = "syllabus.html";
+                    break;
+                case "Schedule":
+                    link = "schedule.html";
+                    break;
+                case "HWs":
+                    link = "hws.html";
+                    break;
+            }
+            
             JsonObject siteTabPagesJson = Json.createObjectBuilder()
                 .add(JSON_NAME, page)
+                .add(JSON_LINK ,link)
                 .build();
             pagesArrayBuilder.add(siteTabPagesJson);
         }
@@ -513,7 +575,7 @@ public class CourseSiteFiles implements AppFileComponent{
 	    JsonObject taJson = Json.createObjectBuilder()
 		    .add(JSON_NAME, ta.getName())
 		    .add(JSON_EMAIL, ta.getEmail())
-                    .add(JSON_TYPE, ta.getType().toString()).build();
+                    .build();
             if (ta.getType().equals(TAType.Graduate.toString()))
                 gradTAsArrayBuilder.add(taJson);
             else
@@ -534,7 +596,8 @@ public class CourseSiteFiles implements AppFileComponent{
                     JsonObject tsJson = Json.createObjectBuilder()
                         .add(JSON_START_TIME, timeSlot.getStartTime().replace(":", "_"))
                         .add(JSON_DAY_OF_WEEK, dow.toString())
-                        .add(JSON_NAME, ta.getName()).build();
+                        .add(JSON_NAME, ta.getName())
+                            .build();
                     officeHoursArrayBuilder.add(tsJson);
                 }
             }
@@ -553,6 +616,8 @@ public class CourseSiteFiles implements AppFileComponent{
         
         ScheduleTabData scheduleTabdataManager = (ScheduleTabData)siteData.getScheduleTabData();
         
+        
+        
         JsonArrayBuilder holidaysArrayBuilder = Json.createArrayBuilder();
         JsonArrayBuilder lecturesTAsArrayBuilder = Json.createArrayBuilder();
         JsonArrayBuilder recitationArrayBuilder = Json.createArrayBuilder();
@@ -566,6 +631,7 @@ public class CourseSiteFiles implements AppFileComponent{
 		    .add(JSON_MONTH, scheduleTabdataManager.getItemMonth(item))
                     .add(JSON_DAY, scheduleTabdataManager.getItemDay(item))
                     .add(JSON_TITLE, item.getTitle())
+                    .add(JSON_LINK, item.getLink())
                     .build();
                 holidaysArrayBuilder.add(itemJson);
             } else {
@@ -574,6 +640,7 @@ public class CourseSiteFiles implements AppFileComponent{
                     .add(JSON_DAY, scheduleTabdataManager.getItemDay(item))
                     .add(JSON_TITLE, item.getTitle())
                     .add(JSON_TOPIC, item.getTopic())
+                    .add(JSON_LINK, item.getLink())
                     .build();
                 
                  if (item.getType().equals("Lecture")) {
@@ -633,6 +700,188 @@ public class CourseSiteFiles implements AppFileComponent{
 
     @Override
     public void exportData(AppDataComponent data, String filePath) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        
+        CourseSiteTabData siteTabDataManager = (CourseSiteTabData)siteData.getSiteTabData();
+
+        String exportPath = siteTabDataManager.getExportDir();
+        
+        exportPath = exportPath.replace("/index_html", "");
+        
+        //CREATE FILE STRUCTURE
+        new File(exportPath + "/js").mkdirs();
+        new File(exportPath + "/css").mkdirs();
+        new File(exportPath + "/images").mkdirs();
+        
+        //ADD IMAGES
+        Path newFaviconPath = Paths.get(exportPath + "/images/SBUWhiteShieldIcon.png");
+        Path currentFaviconPath = Paths.get(siteTabDataManager.getFavIconURL());
+        Files.copy(currentFaviconPath, newFaviconPath, REPLACE_EXISTING);
+        
+        Path newNavbarPath = Paths.get(exportPath + "/images/SBUDarkRedShieldLogo.png");
+        Path currentNavbarPath = Paths.get(siteTabDataManager.getNavbarURL());
+        Files.copy(currentNavbarPath, newNavbarPath, REPLACE_EXISTING);
+        
+        Path newtBottomLeftPath = Paths.get(exportPath + "/images/SBUWhiteShieldLogo.png");
+        Path currentBottomLeftPath = Paths.get(siteTabDataManager.getLeftFooterURL());
+        Files.copy(currentBottomLeftPath, newtBottomLeftPath, REPLACE_EXISTING);
+        
+        Path newBootmRightPath = Paths.get(exportPath + "/images/SBUCSLogo.png");
+        Path currenBottomRightPath = Paths.get(siteTabDataManager.getRightFooterURL());
+        Files.copy(currenBottomRightPath, newBootmRightPath, REPLACE_EXISTING);
+        
+        //ADD CSS
+        Path newPath = Paths.get(exportPath + "/css/sea_wolf.css");
+        Path currentPath = Paths.get("./export/requiredFiles/css/sea_wolf.css");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/css/course_homepage_layout.css");
+        currentPath = Paths.get("./export/requiredFiles/css/course_homepage_layout.css");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        //ADD JS
+        newPath = Paths.get(exportPath + "/js/HWsBuilder.js");
+        currentPath = Paths.get("./export/requiredFiles/js/HWsBuilder.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/js/jquery.min.js");
+        currentPath = Paths.get("./export/requiredFiles/js/jquery.min.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/js/OfficeHoursBuilder.js");
+        currentPath = Paths.get("./export/requiredFiles/js/OfficeHoursBuilder.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/js/PageBuilder.js");
+        currentPath = Paths.get("./export/requiredFiles/js/PageBuilder.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/js/ScheduleBuilder.js");
+        currentPath = Paths.get("./export/requiredFiles/js/ScheduleBuilder.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/js/SectionsBuilder.js");
+        currentPath = Paths.get("./export/requiredFiles/js/SectionsBuilder.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        newPath = Paths.get(exportPath + "/js/SyllabusBuilder.js");
+        currentPath = Paths.get("./export/requiredFiles/js/SyllabusBuilder.js");
+        Files.copy(currentPath, newPath, REPLACE_EXISTING);
+        
+        //ADD HTML
+        Path newIndexHTMLPath = Paths.get(exportPath + "/index.html");
+        Path currentIndexHTMLPath = Paths.get("./export/requiredFiles/html/index.html");
+        Files.copy(currentIndexHTMLPath, newIndexHTMLPath, REPLACE_EXISTING);
+        
+        Path newHWHTMLPath = Paths.get(exportPath + "/hws.html");
+        Path currentHWHTMLPath = Paths.get("./export/requiredFiles/html/hws.html");
+        Files.copy(currentHWHTMLPath, newHWHTMLPath, REPLACE_EXISTING);
+        
+        Path newScheduleHTMLPath = Paths.get(exportPath + "/schedule.html");
+        Path currentScheduleHTMLPath = Paths.get("./export/requiredFiles/html/schedule.html");
+        Files.copy(currentScheduleHTMLPath, newScheduleHTMLPath, REPLACE_EXISTING);
+        
+        Path newSyllabusHTMLPath = Paths.get(exportPath + "/syllabus.html");
+        Path currentSyllabusHTMLPath = Paths.get("./export/requiredFiles/html/syllabus.html");
+        Files.copy(currentSyllabusHTMLPath, newSyllabusHTMLPath, REPLACE_EXISTING);
+        
+        //ADD JSON
+        JsonObject json = loadJSONFile("./work/" + filePath);
+         
+        JsonObject siteTabJson = json.getJsonObject(JSON_SITE);
+        
+       // AND NOW OUTPUT IT TO A JSON FILE WITH PRETTY PRINTING
+	Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	StringWriter sw = new StringWriter();
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(siteTabJson);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	OutputStream os = new FileOutputStream(exportPath +"/js/PageData.Json");
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(siteTabJson);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(exportPath +"/js/PageData.Json");
+	pw.write(prettyPrinted);
+	pw.close();
+                
+        JsonObject syllabusTabJson = json.getJsonObject(JSON_SYLLABUS_TAB);
+        
+        // AND NOW OUTPUT IT TO A JSON FILE WITH PRETTY PRINTING
+	writerFactory = Json.createWriterFactory(properties);
+	sw = new StringWriter();
+	jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(syllabusTabJson);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	os = new FileOutputStream(exportPath +"/js/SyllabusData.Json");
+	jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(syllabusTabJson);
+	prettyPrinted = sw.toString();
+	pw = new PrintWriter(exportPath +"/js/SyllabusData.Json");
+	pw.write(prettyPrinted);
+	pw.close();
+        
+        JsonObject meetingTimesTabJson = json.getJsonObject(JSON_MEETING_TIMES);
+        
+        // AND NOW OUTPUT IT TO A JSON FILE WITH PRETTY PRINTING
+	writerFactory = Json.createWriterFactory(properties);
+	sw = new StringWriter();
+	jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(meetingTimesTabJson);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	os = new FileOutputStream(exportPath +"/js/SectionsData.Json");
+	jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(meetingTimesTabJson);
+	prettyPrinted = sw.toString();
+	pw = new PrintWriter(exportPath +"/js/SectionsData.Json");
+	pw.write(prettyPrinted);
+	pw.close();
+        
+        JsonObject officeHoursTabJson = json.getJsonObject(JSON_OFFICE_HOURS_TAB);
+        
+        // AND NOW OUTPUT IT TO A JSON FILE WITH PRETTY PRINTING
+	writerFactory = Json.createWriterFactory(properties);
+	sw = new StringWriter();
+	jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(officeHoursTabJson);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	os = new FileOutputStream(exportPath +"/js/OfficeHoursData.Json");
+	jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(officeHoursTabJson);
+	prettyPrinted = sw.toString();
+	pw = new PrintWriter(exportPath +"/js/OfficeHoursData.Json");
+	pw.write(prettyPrinted);
+	pw.close();
+        
+        JsonObject sscheduleTabJson = json.getJsonObject(JSON_SCHEDULE);
+        
+        // AND NOW OUTPUT IT TO A JSON FILE WITH PRETTY PRINTING
+	writerFactory = Json.createWriterFactory(properties);
+	sw = new StringWriter();
+	jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(sscheduleTabJson);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	os = new FileOutputStream(exportPath +"/js/ScheduleData.Json");
+	jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(sscheduleTabJson);
+	prettyPrinted = sw.toString();
+	pw = new PrintWriter(exportPath +"/js/ScheduleData.Json");
+	pw.write(prettyPrinted);
+	pw.close();
+        
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+        props.addProperty(APP_EXPORT_PATH, exportPath + "/");
+        
     }
 }

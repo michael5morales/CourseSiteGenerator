@@ -63,7 +63,7 @@ public class CourseSiteTabFoolproofDesign implements FoolproofDesign {
         AppGUIModule gui = app.getGUIModule();
         Label exportDir = (Label) gui.getGUINode(CS_TAB_BANNER_EXPORT_DIR_LABEL);
         
-        String dir = ".\\export\\";
+        String dir = "./export/";
         
         ComboBox subjectBox = (ComboBox)gui.getGUINode(CS_TAB_SUBJECT_COMBO_BOX);
         ComboBox numberBox = (ComboBox)gui.getGUINode(CS_TAB_NUMBER_COMBO_BOX);
@@ -77,7 +77,7 @@ public class CourseSiteTabFoolproofDesign implements FoolproofDesign {
         
         dir += subject + "_" + number + "_" + semester + "_" + year;
         
-        dir += "\\public_html";
+        dir += "/index_html";
         exportDir.setText(dir);
     }
 }

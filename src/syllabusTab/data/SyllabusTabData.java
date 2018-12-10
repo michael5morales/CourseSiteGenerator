@@ -53,7 +53,16 @@ public class SyllabusTabData implements AppDataComponent {
     
     @Override
     public void reset() {
-        
+        AppGUIModule gui = app.getGUIModule();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_DESCRIPTION_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_TOPICS_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_PREREQUISITES_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_OUTCOMES_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_TEXTBOOKS_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_GRADED_COMPONENTS_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_GRADED_NOTE_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_ACADEMIC_DISHONESTY_TEXT_AREA)).clear();
+        ((TextArea)gui.getGUINode(SYLLABUS_TAB_SPECIAL_ASSISTANCE_TEXT_AREA)).clear();
     }
     
     public String getDescriptionTextArea() {

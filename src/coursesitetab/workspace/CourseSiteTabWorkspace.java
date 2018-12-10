@@ -142,7 +142,7 @@ public class CourseSiteTabWorkspace {
         csBuilder.buildImageView(CS_TAB_LEFT_FOOTER_IMAGE_VIEW, styleBox, 1, 3, 1, 1, null, ENABLED, leftFooterURL);
         
         String rightFooterURL = "file:./images/SBUCSLogo.png";
-        csBuilder.buildImageView(CS_TAB_RIGHT_FOOTER_IMAGEE_VIEW, styleBox, 1, 4, 1, 1, null, ENABLED, rightFooterURL);
+        csBuilder.buildImageView(CS_TAB_RIGHT_FOOTER_IMAGE_VIEW, styleBox, 1, 4, 1, 1, null, ENABLED, rightFooterURL);
         
         //BUILD COMBOBOXES
         ComboBox style = csBuilder.buildComboBox(CS_TAB_STYLE_CHECK_BOX, styleBox, 1, 5, 1, 1, EMPTY_TEXT, ENABLED, CS_NULL_LIST, CS_NULL_LIST);
@@ -266,7 +266,7 @@ public class CourseSiteTabWorkspace {
         });
         
         ((Button) gui.getGUINode(CS_TAB_RIGHT_FOOTER_BUTTON)).setOnAction(e -> {
-            controller.processChangeImage(CS_TAB_RIGHT_FOOTER_IMAGEE_VIEW);
+            controller.processChangeImage(CS_TAB_RIGHT_FOOTER_IMAGE_VIEW);
             app.getFileModule().markAsEdited(ENABLED);
         });
         ((CheckBox) gui.getGUINode(CS_TAB_HOME_CHECK_BOX)).setOnAction(e -> {

@@ -6,10 +6,12 @@
 package syllabusTab.workspace.controllers;
 
 import coursesite.CourseSiteApp;
+import coursesite.data.CourseSiteData;
 import djf.modules.AppGUIModule;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import syllabusTab.SyllabusTabPropertyType;
+import syllabusTab.data.SyllabusTabData;
 
 /**
  *
@@ -60,5 +62,15 @@ public class SyllabusTabController {
         Button expandBtn = (Button)gui.getGUINode(btn);
         
         expandBtn.setText("+");
+    }
+    
+    public void processEditTextArea(SyllabusTabPropertyType node) {
+        AppGUIModule gui = app.getGUIModule();
+        
+        CourseSiteData siteData =  (CourseSiteData)app.getDataComponent();
+        SyllabusTabData data = (SyllabusTabData)siteData.getOfficeHoursData();
+        
+        TextArea txtArea = (TextArea)gui.getGUINode(node);
+        
     }
 }

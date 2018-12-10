@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -131,7 +132,7 @@ public class ScheduleTabWorkspace {
         csBuilder.buildLabel(SCHEDULE_TAB_TOPIC_LABEL, addBox, 0, 4, 1, 1, CLASS_CS_PROMPT, ENABLED);
         csBuilder.buildLabel(SCHEDULE_TAB_LINK_LABEL, addBox, 0, 5, 1, 1, CLASS_CS_PROMPT, ENABLED);
         
-        csBuilder.buildComboBox(SCHEDULE_TAB_TYPE_COMBO_BOX, addBox, 1, 1, 1, 1, EMPTY_TEXT, ENABLED, SCHEDULE_NULL, SCHEDULE_NULL);
+        csBuilder.buildComboBox(SCHEDULE_TAB_TYPE_COMBO_BOX, addBox, 1, 1, 1, 1, EMPTY_TEXT, ENABLED, TYPE_OPTIONS, SCHEDULE_NULL);
         
         csBuilder.buildDatePicker(SCHEDULE_TAB_ADD_DATE_DATE_PICKER, addBox, 1, 2, 1, 1, EMPTY_TEXT, ENABLED);
         
