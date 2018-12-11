@@ -21,6 +21,7 @@ import properties_manager.PropertiesManager;
  *
  * @author McKillaGorilla
  */
+
 public class FileFoolproofDesign implements FoolproofDesign {
     AppTemplate app;
     

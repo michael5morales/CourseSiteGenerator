@@ -8,6 +8,7 @@ package scheduletab.data;
 import coursesite.CourseSiteApp;
 import djf.components.AppDataComponent;
 import djf.modules.AppGUIModule;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -100,7 +101,8 @@ public class ScheduleTabData implements AppDataComponent {
         ArrayList<ScheduleItem> temp = new ArrayList<>();
         
         for (int i = 0; i < allItems.size(); i++) {
-            int value = getDateValue(allItems.get(i).getDate());
+            String date = formatDate(allItems.get(i).getDate());
+            int value = getDateValue(date);
             if (value <= endValue && value >= startValue) {
                 temp.add(allItems.get(i));
             }
@@ -113,6 +115,14 @@ public class ScheduleTabData implements AppDataComponent {
             }
     }
     
+    private String formatDate(String date) {
+        String[] dates = date.split("/");
+        if (dates[2].equals("2018")) {
+            dates[2] = "18";
+        }
+        return dates[0] + "/" + dates[1] + "/" + dates[2];
+    }
+    
     public boolean isEmpty() {
         return allItems.isEmpty();
     }
@@ -121,6 +131,54 @@ public class ScheduleTabData implements AppDataComponent {
         AppGUIModule gui = app.getGUIModule();
         TableView<ScheduleItem> scheduleTable = (TableView)gui.getGUINode(SCHEDULE_TAB_ITEMS_TABLE_VIEW);
         return scheduleTable.getSelectionModel().getSelectedItem() != null;
+    }
+    
+    public String getStartingMonth() {
+        AppGUIModule gui = app.getGUIModule();
+        DatePicker datePicker = (DatePicker) gui.getGUINode(SCHEDULE_TAB_START_DATE_DATE_PICKER);
+        String date = datePicker.getValue().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        String[] nums = date.split("/");
+        return nums[0];
+    }
+    
+    public String getStartingDay() {
+        AppGUIModule gui = app.getGUIModule();
+        DatePicker datePicker = (DatePicker) gui.getGUINode(SCHEDULE_TAB_START_DATE_DATE_PICKER);
+        String date = datePicker.getValue().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        String[] nums = date.split("/");
+        return nums[1];
+    }
+    
+    public String getEndingMonth() {
+        AppGUIModule gui = app.getGUIModule();
+        DatePicker datePicker = (DatePicker) gui.getGUINode(SCHEDULE_TAB_END_DATE_DATE_PICKER);
+        String date = datePicker.getValue().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        String[] nums = date.split("/");
+        return nums[0];
+    }
+    
+    public String getEndingDay() {
+        AppGUIModule gui = app.getGUIModule();
+        DatePicker datePicker = (DatePicker) gui.getGUINode(SCHEDULE_TAB_END_DATE_DATE_PICKER);
+        String date = datePicker.getValue().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+        String[] nums = date.split("/");
+        return nums[1];
+    }
+    
+    public void setStartingDate(String initDay, String initMonth) {
+        AppGUIModule gui = app.getGUIModule();
+        String date = initDay + "/" + initMonth + "/2018";
+        LocalDate startDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/M/yyyy"));
+        DatePicker datePicker = (DatePicker)gui.getGUINode(SCHEDULE_TAB_START_DATE_DATE_PICKER);
+        datePicker.setValue(startDate);
+    }
+    
+    public void setEndingDate(String initDay, String initMonth) {
+        AppGUIModule gui = app.getGUIModule();
+        String date = initDay + "/" + initMonth + "/2018";
+        LocalDate endDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/M/yyyy"));
+        DatePicker datePicker = (DatePicker)gui.getGUINode(SCHEDULE_TAB_END_DATE_DATE_PICKER);
+        datePicker.setValue(endDate);
     }
     
     public ScheduleItem getSelectedItem() {

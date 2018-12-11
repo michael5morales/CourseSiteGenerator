@@ -50,7 +50,8 @@ public class AppDialogsFacade {
     public static void showExportDialog(AppTemplate app) throws IOException {
         AppWebDialog dialog = new AppWebDialog(app);
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-        String filePath = props.getProperty(APP_EXPORT_PAGE);
+        String filePath = props.getProperty(APP_EXPORT_PATH) + props.getProperty(APP_EXPORT_PAGE);
+        
         dialog.showWebDialog(filePath);
     }
 

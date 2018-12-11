@@ -138,6 +138,10 @@ public class CourseSiteFiles implements AppFileComponent{
     static final String JSON_HWS = "hws";
     static final String JSON_HOLIDAYS = "holidays";
     static final String JSON_LINK = "link";
+    static final String JSON_STARTING_MONTH = "startingMondayMonth";
+    static final String JSON_STARTING_DAY = "startingMondayDay";
+    static final String JSON_ENDING_MONTH = "endingFridayMonth";
+    static final String JSON_ENDING_DAY = "endingFridayDay";
      
     public CourseSiteFiles(CourseSiteApp initApp) {
         app = initApp;
@@ -300,6 +304,14 @@ public class CourseSiteFiles implements AppFileComponent{
         ScheduleTabData scheduleTabDataManager = (ScheduleTabData)siteData.getScheduleTabData();
         
         JsonObject scheduleTabJson = json.getJsonObject(JSON_SCHEDULE);
+        
+        String startDay = scheduleTabJson.getString(JSON_STARTING_DAY);
+        String startMonth = scheduleTabJson.getString(JSON_STARTING_MONTH);
+        String endDay = scheduleTabJson.getString(JSON_ENDING_DAY);
+        String endMonth = scheduleTabJson.getString(JSON_ENDING_MONTH);
+        
+        scheduleTabDataManager.setStartingDate(startDay, startMonth);
+        scheduleTabDataManager.setEndingDate(endDay, endMonth);
         
         JsonArray holdiayJsonArray = scheduleTabJson.getJsonArray(JSON_HOLIDAYS);
         
@@ -657,8 +669,16 @@ public class CourseSiteFiles implements AppFileComponent{
         JsonArray lecturesArray = lecturesTAsArrayBuilder.build();
 	JsonArray recitationArray = recitationArrayBuilder.build();
         JsonArray hwsArray = hwsArrayBuilder.build();
+        String startingMonth = scheduleTabdataManager.getStartingMonth();
+        String startingDay = scheduleTabdataManager.getStartingDay();
+        String endingMonth = scheduleTabdataManager.getEndingMonth();
+        String endingDay = scheduleTabdataManager.getEndingDay();
         
         JsonObject scheduleJson = Json.createObjectBuilder()
+                .add(JSON_STARTING_MONTH ,startingMonth)
+                .add(JSON_STARTING_DAY, startingDay)
+                .add(JSON_ENDING_MONTH, endingMonth)
+                .add(JSON_ENDING_DAY, endingDay)
                 .add(JSON_HOLIDAYS, holidaysArray)
                 .add(JSON_LECTURES, lecturesArray)
                 .add(JSON_RECITATIONS, recitationArray)
