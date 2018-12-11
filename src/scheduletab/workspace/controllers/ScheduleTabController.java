@@ -120,6 +120,7 @@ public class ScheduleTabController {
         TextField linkTextField = (TextField) app.getGUIModule().getGUINode(SCHEDULE_TAB_LINK_TEXT_FIELD);
         
         ScheduleItem item = data.getSelectedItem();
+        
         String type = item.getType();
         typeBox.getSelectionModel().select(type);
         
